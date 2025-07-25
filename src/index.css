@@ -1,0 +1,41 @@
+/* globals.css or index.css */
+@import "tailwindcss";
+
+
+:root {
+  --color-background: #0D1117;
+  --color-text: #ffffff;
+  --color-bgPrimary: #010409;
+  --color-bgSecondary: #0D1117;
+  --color-bgHover: #1f2937;
+  --color-textHover: #006affd3;
+  --color-divider: #a4c7ce8a;
+  --color-third: #beb6b6e3;
+  --color-highlight : #679ae7;
+  background-color: var(--color-background);
+}
+
+.text-primary { color: var(--color-text); }
+.text-secondary { color: var(--color-bgPrimary); }
+.text-third { color: var(--color-third); }
+.text-highlight { color: var(--color-highlight); }
+
+.bg-primary { background-color: var(--color-bgPrimary); }
+.bg-secondary { background-color: var(--color-bgSecondary); }
+.bg-hover {background-color: var(--color-bgHover); }
+
+.border-primary { border-color: var(--color-text); }
+.border-divider { background-color: var(--color-divider); }
+
+.text-hover:hover { color: var(--color-textHover); }
+
+.logo-hover {
+  transition: transform 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-hover:hover {
+  transform: scale(1.05);
+  color: var(--color-textHover);
+}
