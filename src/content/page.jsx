@@ -16,7 +16,7 @@ import BuildIcon from "@mui/icons-material/Build";
 import LanguageIcon from "@mui/icons-material/Language";
 
 import Converse2k24 from "../assets/Converse2k24.png";
-import Memories from "../assets/Memories.png";
+import Memories from "../assets/memories.png";
 import ReactJSStudt from "../assets/React-JS-Study.png"
 import SoftwareEngineering from "../assets/SoftwareEngineering.png";
 import JSLOGO from "../assets/JSLOGO.png"
