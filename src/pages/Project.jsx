@@ -8,11 +8,9 @@ import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 const ProjectsSection = () => {
   const [filter, setFilter] = useState("all");
 
-  // Featured project (first one)
   const featuredProject = projects[1];
   const otherProjects = projects.slice(1);
 
-  // Filter projects based on whether they have a live demo
   const filteredProjects =
     filter === "all"
       ? otherProjects
@@ -23,66 +21,65 @@ const ProjectsSection = () => {
   return (
     <section className="bg-primary text-primary min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header with Icon */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-3 mb-10"
+          className="flex flex-col items-center text-center mb-12"
         >
-          <FolderOpenIcon className="text-highlight" sx={{ fontSize: 32 }} />
+          <FolderOpenIcon
+            className="text-highlight mb-4"
+            sx={{ fontSize: 48 }}
+          />
           <h1 className="text-4xl md:text-5xl font-bold">
             My <span className="text-highlight">Projects</span>
           </h1>
         </motion.div>
 
-        {/* Featured Project */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-1 w-12 bg-highlight rounded-full"></div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+          <div className="flex flex-col items-center text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
               ⭐ Featured Project
             </h2>
+            <div className="h-1 w-20 bg-highlight rounded-full mt-2"></div>
           </div>
           <FeaturedProjectCard {...featuredProject} />
         </motion.div>
 
-        {/* Filter Buttons */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mb-12"
         >
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-1 w-12 bg-highlight rounded-full"></div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+          <div className="flex flex-col items-center text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
               All Projects
             </h2>
-            <div className="h-1 flex-1 bg-gradient-to-r from-highlight to-transparent rounded-full"></div>
+            <div className="h-1 w-20 bg-highlight rounded-full mt-2"></div>
           </div>
 
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-3 justify-center">
             <button
               onClick={() => setFilter("all")}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-lg font-medium transition-all duration-300 ${
                 filter === "all"
-                  ? "bg-highlight text-black shadow-lg shadow-highlight/50 scale-105"
+                  ? "bg-highlight text-white shadow-lg shadow-highlight/30 scale-105"
                   : "bg-secondary border border-white/20 text-white hover:border-highlight hover:text-highlight"
               }`}
             >
-              All Projects ({otherProjects.length})
+              All ({otherProjects.length})
             </button>
             <button
               onClick={() => setFilter("live")}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-lg font-medium transition-all duration-300 ${
                 filter === "live"
-                  ? "bg-highlight text-black shadow-lg shadow-highlight/50 scale-105"
+                  ? "bg-highlight text-white shadow-lg shadow-highlight/30 scale-105"
                   : "bg-secondary border border-white/20 text-white hover:border-highlight hover:text-highlight"
               }`}
             >
@@ -90,13 +87,13 @@ const ProjectsSection = () => {
             </button>
             <button
               onClick={() => setFilter("repo")}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-lg font-medium transition-all duration-300 ${
                 filter === "repo"
-                  ? "bg-highlight text-black shadow-lg shadow-highlight/50 scale-105"
+                  ? "bg-highlight text-white shadow-lg shadow-highlight/30 scale-105"
                   : "bg-secondary border border-white/20 text-white hover:border-highlight hover:text-highlight"
               }`}
             >
-              Repository Only ({otherProjects.filter((p) => !p.live).length})
+              Code Only ({otherProjects.filter((p) => !p.live).length})
             </button>
           </div>
         </motion.div>
