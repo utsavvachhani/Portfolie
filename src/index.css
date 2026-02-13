@@ -11,23 +11,49 @@
   --color-textHover: #006affd3;
   --color-divider: #a4c7ce8a;
   --color-third: #beb6b6e3;
-  --color-highlight : #679ae7;
+  --color-highlight: #679ae7;
   background-color: var(--color-background);
 }
 
-.text-primary { color: var(--color-text); }
-.text-secondary { color: var(--color-bgPrimary); }
-.text-third { color: var(--color-third); }
-.text-highlight { color: var(--color-highlight); }
+.text-primary {
+  color: var(--color-text);
+}
 
-.bg-primary { background-color: var(--color-bgPrimary); }
-.bg-secondary { background-color: var(--color-bgSecondary); }
-.bg-hover {background-color: var(--color-bgHover); }
+.text-secondary {
+  color: var(--color-bgPrimary);
+}
 
-.border-primary { border-color: var(--color-text); }
-.border-divider { background-color: var(--color-divider); }
+.text-third {
+  color: var(--color-third);
+}
 
-.text-hover:hover { color: var(--color-textHover); }
+.text-highlight {
+  color: var(--color-highlight);
+}
+
+.bg-primary {
+  background-color: var(--color-bgPrimary);
+}
+
+.bg-secondary {
+  background-color: var(--color-bgSecondary);
+}
+
+.bg-hover {
+  background-color: var(--color-bgHover);
+}
+
+.border-primary {
+  border-color: var(--color-text);
+}
+
+.border-divider {
+  background-color: var(--color-divider);
+}
+
+.text-hover:hover {
+  color: var(--color-textHover);
+}
 
 .logo-hover {
   transition: transform 0.3s ease, color 0.3s ease;
@@ -38,4 +64,57 @@
 .logo-hover:hover {
   transform: scale(1.05);
   color: var(--color-textHover);
+}
+
+/* Glass Morphism Card Effect */
+.glass-card {
+  background: rgba(13, 17, 23, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card:hover {
+  background: rgba(13, 17, 23, 0.8);
+  border-color: var(--color-highlight);
+  box-shadow: 0 8px 16px rgba(103, 154, 231, 0.2);
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+}
+
+/* Animations for Projects Page */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s ease infinite;
 }
