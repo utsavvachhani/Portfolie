@@ -6,7 +6,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import CodeIcon from "@mui/icons-material/Code";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
-// Get icon based on milestone type
+// Choose icon based on milestone type
 const getIcon = (title) => {
   if (
     title.toLowerCase().includes("grade") ||
@@ -22,7 +22,8 @@ const getIcon = (title) => {
   }
   return <EmojiEventsIcon className="text-highlight" />;
 };
-  
+
+// Motion variants for left/right slide animation
 const itemVariants = (side) => ({
   hidden: { opacity: 0, x: side === "left" ? -50 : 50, y: 20 },
   visible: {
@@ -37,7 +38,7 @@ const LifeJourneyTimeline = () => {
   return (
     <div className="relative w-full py-10">
       <div className="relative max-w-6xl mx-auto">
-        {/* Vertical center line - hidden on small screens */}
+        {/* Vertical line in center */}
         <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-highlight via-highlight/50 to-transparent z-0" />
 
         {milestones.map((item, index) => (
@@ -51,12 +52,12 @@ const LifeJourneyTimeline = () => {
               item.side === "left" ? "md:justify-start" : "md:justify-end"
             }`}
           >
-            {/* Timeline Dot with Icon - hidden on small screens */}
+            {/* Timeline Dot with Icon */}
             <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-secondary rounded-full border-2 border-highlight z-10 shadow-lg shadow-highlight/30 items-center justify-center">
               {getIcon(item.title)}
             </div>
 
-            {/* Card */}
+            {/* Milestone Card */}
             <div
               className={`w-full md:w-[calc(50%-3rem)] ${
                 item.side === "left"

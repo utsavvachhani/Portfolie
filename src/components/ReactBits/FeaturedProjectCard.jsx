@@ -20,7 +20,7 @@ const FeaturedProjectCard = ({
       className="group relative bg-secondary border border-white/10 rounded-2xl overflow-hidden hover:border-highlight transition-all duration-500 shadow-2xl hover:shadow-highlight/20"
     >
       {/* Featured Badge */}
-      <div className="absolute top-6 right-6 z-10 bg-highlight text-white px-4 py-2 rounded-full font-bold text-sm flex items-center gap-2 shadow-lg">
+      <div className="absolute top-6 right-6 z-10 bg-highlight text-white dark:text-black px-4 py-2 rounded-full font-bold text-sm flex items-center gap-2 shadow-lg">
         <StarIcon className="text-sm" />
         Featured
       </div>
@@ -70,7 +70,7 @@ const FeaturedProjectCard = ({
               href={repo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-black transition-all duration-300 font-medium group/btn"
+              className="flex items-center gap-2 px-6 py-3 border-2 border-white text-white dark:text-black rounded-lg hover:bg-white hover:text-black transition-all duration-300 font-medium group/btn"
             >
               <GitHubIcon className="group-hover/btn:rotate-12 transition-transform" />
               View Code
@@ -80,7 +80,7 @@ const FeaturedProjectCard = ({
                 href={live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-highlight text-white rounded-lg hover:bg-white hover:text-black transition-all duration-300 font-medium shadow-lg shadow-highlight/30 hover:shadow-white/30 group/btn"
+                className="flex items-center gap-2 px-6 py-3 bg-highlight text-white dark:text-black rounded-lg hover:bg-white hover:text-black transition-all duration-300 font-medium shadow-lg shadow-highlight/30 hover:shadow-white/30 group/btn"
               >
                 <LaunchIcon className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                 Live Demo

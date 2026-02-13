@@ -57,11 +57,10 @@ const CircularText = ({
           rotate: { type: "spring", damping: 20, stiffness: 300 },
           scale: { type: "spring", damping: 20, stiffness: 300 },
         };
-        scaleVal = 1;
         break;
       case "goBonkers":
         transitionConfig = getTransition(spinDuration / 20, start);
-        scaleVal = 0.8;
+        scaleVal = 0.85;
         break;
       default:
         transitionConfig = getTransition(spinDuration, start);
@@ -85,7 +84,10 @@ const CircularText = ({
 
   return (
     <motion.div
-      className={`m-0 mx-auto rounded-full w-[200px] h-[200px] relative text-primary font-black text-center cursor-pointer origin-center ${className}`}
+      className={`m-0 mx-auto rounded-full relative 
+      w-[200px] h-[200px] md:w-[240px] md:h-[240px]
+      text-primary font-black text-center 
+      cursor-pointer origin-center ${className}`}
       style={{ rotate: rotation }}
       initial={{ rotate: 0 }}
       animate={controls}
@@ -102,7 +104,7 @@ const CircularText = ({
         return (
           <span
             key={i}
-            className="absolute inline-block inset-0 text-2xl transition-all duration-500 ease-[cubic-bezier(0,0,0,1)]"
+            className="absolute inline-block inset-0 text-2xl text-primary transition-all duration-500 ease-[cubic-bezier(0,0,0,1)]"
             style={{ transform, WebkitTransform: transform }}
           >
             {letter}
