@@ -12,6 +12,8 @@
   --color-divider: #a4c7ce8a;
   --color-third: #beb6b6e3;
   --color-highlight: #679ae7;
+  --color-light: #f0f0f0;
+  --color-light-hover: #000000;
   background-color: var(--color-background);
 }
 
@@ -26,11 +28,21 @@
   --color-divider: #d1d5db;
   --color-third: #6b7280;
   --color-highlight: #0066cc;
+  --color-light: #050505;
+  --color-light-hover: #000000;
 }
 
 
 .text-primary {
   color: var(--color-text);
+}
+
+.text-dark {
+  color: var(--color-light);
+}
+
+.text-dark:hover {
+  color: var(--color-light-hover);
 }
 
 .text-secondary {
@@ -62,7 +74,7 @@
 }
 
 .border-divider {
-  background-color: var(--color-divider);
+  border-color: var(--color-divider);
 }
 
 .text-hover:hover {

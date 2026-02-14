@@ -77,7 +77,7 @@ const ProjectCard = ({
               href={live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3  justify-center bg-highlight text-white dark:text-black rounded-lg hover:bg-white  hover:text-black transition-all duration-300 font-medium shadow-lg shadow-highlight/30 hover:shadow-white/30 group/btn"
+              className="flex items-center gap-2 px-6 py-3  justify-center bg-highlight text-dark rounded-lg hover:bg-white  hover:text-black transition-all duration-300 font-medium shadow-lg shadow-highlight/30 hover:shadow-white/30 group/btn"
             >
               <LaunchIcon sx={{ fontSize: 20 }} />
               Live

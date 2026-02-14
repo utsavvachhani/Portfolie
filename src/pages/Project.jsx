@@ -46,7 +46,7 @@ const ProjectsSection = () => {
           className="mb-16"
         >
           <div className="flex flex-col items-center text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-black mb-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-dark mb-2">
               ⭐ Featured Project
             </h2>
             <div className="h-1 w-20 bg-highlight rounded-full mt-2"></div>
