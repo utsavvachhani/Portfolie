@@ -1,42 +1,68 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { skillCategories } from "../content/page";
+import SkillsComponents from "../components/skills/SkillsComponents";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 
 function Skills() {
   return (
-    <div className="min-h-screen max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-center mb-10 text-hover">
-        My Skills
-      </h1>
+    <section className="relative bg-primary text-primary min-h-screen py-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
+      {/* Visual Canvas Depth: Premium Background Orbs */}
+      <div className="absolute top-[10%] left-[-15%] w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[10%] right-[-10%] w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full bg-purple-500/5 blur-[110px] pointer-events-none"></div>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-        {skillCategories.map(({ title, icon, skills }, index) => (
-          <div
-            key={index}
-            className="group relative border border-divider bg-secondary backdrop-blur-md rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1 p-6 hover:border-highlight"
-          >
-            {/* Header */}
-            <div className="flex items-center gap-4 font-semibold text-highlight">
-              <div className="bg-primary p-3 rounded-full transition duration-300 group-hover:bg-highlight group-hover:text-white">
-                {icon}
-              </div>
-              <h3 className="text-xl">{title}</h3>
-            </div>
-
-            {/* Skills Grid */}
-            <div className="grid grid-cols-2 gap-2 mt-5 text-third">
-              {skills.map((skill, i) => (
-                <div
-                  key={i}
-                  className="bg-primary text-primary hover:bg-highlight hover:text-white hover:font-bold py-2 px-3 rounded-md text-sm text-center transition"
-                >
-                  {skill}
-                </div>
-              ))}
-            </div>
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Animated Page Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center text-center mb-20"
+        >
+          <div className="p-3 rounded-2xl bg-highlight/10 border border-highlight/20 mb-4 shadow-lg shadow-highlight/5">
+            <AutoAwesomeIcon className="text-highlight" sx={{ fontSize: 32 }} />
           </div>
-        ))}
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight">
+            Technical{" "}
+            <span className="text-highlight font-extrabold">Abilities</span>
+          </h1>
+          <p className="text-third text-sm md:text-base mt-4 max-w-xl leading-relaxed">
+            A comprehensive overview of my software engineering capabilities,
+            framework proficiencies, database management, and architecture
+            practices.
+          </p>
+        </motion.div>
+
+        <SkillsComponents
+          containerVariants={containerVariants}
+          cardVariants={cardVariants}
+          skillCategories={skillCategories}
+        />
       </div>
-    </div>
+    </section>
   );
 }
 

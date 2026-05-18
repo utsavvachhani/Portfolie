@@ -1,92 +1,111 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { pages, socialLinks } from "../../content/page.jsx";
 import uvPhoto from "../../assets/uvPhoto.jpg";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import EmailIcon from "@mui/icons-material/Email";
 
 function AppFooter() {
   return (
-    <footer className="bg-primary text-primary py-12 px-4 sm:px-6 border-t border-white/10">
-      <div className="max-w-screen-xl mx-auto">
+    <footer className="relative bg-primary text-primary py-16 px-4 sm:px-6 border-t border-divider/10 overflow-hidden">
+      {/* Decorative top glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-screen-md h-px bg-gradient-to-r from-transparent via-highlight/50 to-transparent"></div>
+
+      <div className="max-w-screen-xl mx-auto relative z-10">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Profile Section */}
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <img
-                src={uvPhoto}
-                alt="Utsav Vachhani"
-                className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-4 border-highlight shadow-lg object-cover"
-              />
-              <div className="text-center sm:text-left">
-                <Typography variant="h6" className="font-bold text-white mb-2">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-5 text-center sm:text-left">
+              <div className="relative group shrink-0">
+                <div className="absolute -inset-1 bg-gradient-to-tr from-highlight via-cyan-500 to-indigo-500 rounded-full blur opacity-45 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                <img
+                  src={uvPhoto}
+                  alt="Utsav Vachhani"
+                  className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-divider/20 shadow-xl object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div>
+                <Typography variant="h6" className="font-extrabold text-white text-lg sm:text-xl tracking-tight mb-1">
                   Utsav Vachhani
                 </Typography>
-                <p className="text-sm text-gray-400">Full-Stack Developer</p>
-                <p className="text-sm text-gray-400">B.Tech IT Student</p>
+                <div className="flex flex-col space-y-1.5 mt-2">
+                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-secondary/50 text-highlight border border-divider/10 shadow-sm inline-block w-max mx-auto sm:mx-0">
+                    🚀 Full-Stack Developer
+                  </span>
+                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-secondary/50 text-highlight border border-divider/10 shadow-sm inline-block w-max mx-auto sm:mx-0">
+                    🎓 B.Tech IT Student
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="flex flex-col items-center md:items-start">
-            <Typography variant="h6" className="font-bold text-highlight mb-4">
+            <Typography variant="h6" className="font-extrabold text-white text-base tracking-wider uppercase mb-5">
               Quick Links
             </Typography>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-3.5 w-full max-w-[280px] md:max-w-none justify-items-center md:justify-items-start">
               {pages.map(({ name, href, icon }) => (
-                <a
+                <Link
                   key={name}
-                  href={href}
-                  className="flex items-center space-x-2 text-gray-400 hover:text-highlight transition-colors duration-300"
+                  to={href}
+                  className="flex items-center space-x-2 text-primary/70 hover:text-highlight transition-all duration-300 transform hover:translate-x-1 group"
                 >
-                  <span className="text-sm">{icon}</span>
-                  <span className="text-sm font-medium">{name}</span>
-                </a>
+                  <span className="text-highlight group-hover:scale-110 transition-transform duration-300 flex items-center">
+                    {icon}
+                  </span>
+                  <span className="text-sm font-semibold">{name}</span>
+                </Link>
               ))}
             </div>
           </div>
 
           {/* Contact & Social */}
           <div className="flex flex-col items-center md:items-start">
-            <Typography variant="h6" className="font-bold text-highlight mb-4">
+            <Typography variant="h6" className="font-extrabold text-white text-base tracking-wider uppercase mb-5">
               Get in Touch
             </Typography>
 
             {/* Contact Info */}
-            <div className="space-y-2 mb-4 text-center md:text-left">
-              <p className="text-sm text-gray-400">
-                📞{" "}
+            <div className="space-y-3.5 mb-5 text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start space-x-2.5 group">
+                <LocalPhoneIcon className="text-highlight group-hover:scale-110 transition-transform" sx={{ fontSize: 18 }} />
                 <a
                   href="tel:9512655868"
-                  className="hover:text-highlight transition-colors"
+                  className="text-sm text-primary/70 hover:text-highlight transition-colors duration-300 font-semibold"
                 >
                   9512655868
                 </a>
-              </p>
-              <p className="text-sm text-gray-400">
-                📧{" "}
+              </div>
+              <div className="flex items-center justify-center md:justify-start space-x-2.5 group">
+                <EmailIcon className="text-highlight group-hover:scale-110 transition-transform" sx={{ fontSize: 18 }} />
                 <a
                   href="mailto:vachhaniutsav2@gmail.com"
-                  className="hover:text-highlight transition-colors"
+                  className="text-sm text-primary/70 hover:text-highlight transition-colors duration-300 font-semibold break-all"
                 >
                   vachhaniutsav2@gmail.com
                 </a>
-              </p>
+              </div>
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center space-x-3 justify-center md:justify-start">
-              {socialLinks.map(({ href, icon, label }) => (
+            <div className="flex items-center space-x-2 justify-center md:justify-start flex-wrap gap-y-2 max-w-[280px] md:max-w-none">
+              {socialLinks.map(({ href, icon, label, textColor }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   title={label}
-                  className="p-2 rounded-lg bg-secondary hover:bg-highlight hover:text-white transition-all duration-300 border border-white/10 hover:border-highlight"
+                  className="p-2.5 rounded-xl text-primary/80 hover:text-white bg-secondary/30 hover:bg-secondary border border-divider/10 hover:border-highlight/20 hover:scale-110 active:scale-95 transition-all duration-300 group flex items-center justify-center"
                 >
-                  {icon}
+                  <span className={`transition-colors duration-300 ${textColor} flex items-center justify-center`}>
+                    {icon}
+                  </span>
                 </a>
               ))}
             </div>
@@ -94,28 +113,31 @@ function AppFooter() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/10 my-8"></div>
+        <div className="border-t border-divider/10 my-8"></div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 text-sm text-primary/60">
           {/* Copyright */}
-          <div className="text-sm text-gray-400 text-center sm:text-left">
+          <div className="text-center sm:text-left font-medium">
             © {new Date().getFullYear()} Utsav Vachhani. All rights reserved.
           </div>
 
           {/* Made with Love */}
-          <div className="flex items-center space-x-2 text-sm text-gray-400">
+          <div className="flex items-center space-x-1.5 justify-center group cursor-default">
             <span>Made with</span>
             <FavoriteIcon
-              className="text-red-500 animate-pulse"
+              className="text-red-500 animate-pulse group-hover:scale-125 transition-transform"
               sx={{ fontSize: 16 }}
             />
-            <span>in India</span>
+            <span>in</span>
+            <span className="font-bold bg-gradient-to-r from-orange-400 via-white to-green-500 bg-clip-text text-transparent hover:brightness-125 transition-all duration-300">
+              India
+            </span>
           </div>
 
           {/* Tech Stack */}
-          <div className="text-sm text-gray-400 text-center sm:text-right">
-            Built with React & Tailwind CSS
+          <div className="text-center sm:text-right font-medium">
+            Built with <span className="text-highlight">React</span> & <span className="text-highlight">Tailwind CSS</span>
           </div>
         </div>
       </div>
