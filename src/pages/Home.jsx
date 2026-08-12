@@ -2,10 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import HeroComp from "../components/Home/HeroComp.jsx";
-import ProjectCard from "../components/ReactBits/ProjectCard.jsx";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import FeaturedProjects from "../components/Home/FeaturedProjects.jsx";
+import LifeJourneyTimeline from "../components/ReactBits/LifeJourneyTimeline.jsx";
 import SkillsComponents from "../components/skills/SkillsComponents";
-import { projects, stats, skillCategories } from "../content/page.jsx";
+import { stats, skillCategories } from "../content/page.jsx";
 
 function Home() {
   const containerVariants = {
@@ -18,6 +18,7 @@ function Home() {
       },
     },
   };
+
   const cardVariants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -26,7 +27,6 @@ function Home() {
       transition: {
         duration: 0.7,
         ease: [0.25, 1, 0.5, 1],
-        delay: Math.random() * 0.3,
       },
     },
     hover: {
@@ -34,13 +34,14 @@ function Home() {
       scale: 1.02,
     },
   };
+
   return (
     <div className="relative bg-primary text-primary overflow-hidden min-h-screen">
-      {/* Dynamic Background Blurs (Glowing Orbs) for the entire homepage */}
-      <div className="absolute top-[30%] -right-48 w-96 h-96 rounded-full bg-highlight/5 blur-[120px] pointer-events-none"></div>
-      <div className="absolute top-[60%] -left-48 w-80 h-80 rounded-full bg-purple-500/5 blur-[100px] pointer-events-none"></div>
+      {/* Background Radial Glow Orbs */}
+      <div className="absolute top-[30%] -right-48 w-96 h-96 rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[60%] -left-48 w-80 h-80 rounded-full bg-emerald-500/5 blur-[100px] pointer-events-none" />
 
-      {/* Hero Section */}
+      {/* 1. Full-Section 3D WebGL Hero */}
       <HeroComp />
 
       {/* Animated Stats Banner */}
@@ -72,79 +73,29 @@ function Home() {
         </div>
       </section>
 
-      {/* Featured Projects Section */}
-      <section
-        id="featured-projects"
-        className="relative z-10 py-24 px-6 sm:px-12 lg:px-8"
-      >
+      {/* 2. Interactive Featured Projects Showcase */}
+      <FeaturedProjects />
+
+      {/* 3. Life Journey Timeline Section */}
+      <section id="life-journey-timeline" className="relative z-10 py-24 px-6 sm:px-12 lg:px-8 bg-secondary/10 border-t border-divider/15">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-primary mb-4 tracking-tight"
-            >
-              Featured <span className="text-highlight">Projects</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-third text-sm sm:text-base max-w-xl mx-auto leading-relaxed"
-            >
-              A selective showcase of software solutions I've developed,
-              featuring full-stack engineering, responsive design, and robust
-              database backends.
-            </motion.p>
+          <div className="flex flex-col items-center text-center mb-12">
+            <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
+              Academic & Professional Milestones
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary mt-3 tracking-tight">
+              Life Journey <span className="text-highlight">Timeline</span>
+            </h2>
+            <div className="h-1 w-16 bg-highlight rounded-full mt-3 shadow-md shadow-highlight/45" />
           </div>
 
-          {/* Symmetric Grid (3 Columns) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.slice(0, 6).map((project, index) => (
-              <ProjectCard
-                key={index}
-                title={project.title}
-                description={project.description}
-                image={project.image}
-                repo={project.repo}
-                live={project.live}
-                techStack={project.techStack}
-                index={index}
-              />
-            ))}
-          </div>
-
-          {/* View More Centralized Premium Button */}
-          <div className="mt-16 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="inline-block"
-            >
-              <Link
-                to="/projects"
-                className="group flex items-center gap-3 px-8 py-4 bg-secondary border border-divider hover:border-highlight text-primary font-bold rounded-xl shadow-lg hover:shadow-highlight/20 transition-all duration-300 hover:scale-105"
-              >
-                <span>Explore All Projects</span>
-                <ArrowForwardIosIcon className="text-xs text-highlight group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
+          <LifeJourneyTimeline />
         </div>
       </section>
 
-      {/* Tech Stack Dashboard Section */}
+      {/* 4. Tech Stack Dashboard Section */}
       <section className="relative z-10 bg-secondary/15 py-24 px-6 sm:px-12 lg:px-8 border-t border-divider/25 overflow-hidden">
-        <div className="absolute top-[20%] right-[-10%] w-72 h-72 rounded-full bg-highlight/5 blur-[100px] pointer-events-none"></div>
-
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -162,8 +113,7 @@ function Home() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-third text-sm sm:text-base max-w-xl mx-auto leading-relaxed"
             >
-              My standard technologies for constructing lightweight web apps,
-              robust server interfaces, and responsive user screens.
+              Core technologies for building scalable full-stack web applications, REST microservices, and reactive user interfaces.
             </motion.p>
           </div>
 
@@ -173,7 +123,6 @@ function Home() {
             skillCategories={skillCategories.slice(0, 3)}
           />
 
-          {/* Call to full skills page */}
           <div className="mt-12 text-center">
             <Link
               to="/skills"
@@ -186,10 +135,8 @@ function Home() {
         </div>
       </section>
 
-      {/* Premium Call to Action Banner (Collaboration Card) */}
+      {/* 5. Call to Action Banner */}
       <section className="relative z-10 py-24 px-6 sm:px-12 lg:px-8 border-t border-divider/25 bg-secondary/5">
-        <div className="absolute bottom-[-10%] left-[20%] w-96 h-96 rounded-full bg-highlight/5 blur-[150px] pointer-events-none"></div>
-
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
@@ -198,10 +145,6 @@ function Home() {
             transition={{ duration: 0.8 }}
             className="relative rounded-3xl p-10 sm:p-14 md:p-16 overflow-hidden glass-card border border-divider shadow-2xl text-center flex flex-col items-center"
           >
-            {/* Embedded glowing gradients */}
-            <div className="absolute -top-24 -left-24 w-52 h-52 rounded-full bg-highlight/15 blur-3xl pointer-events-none"></div>
-            <div className="absolute -bottom-24 -right-24 w-52 h-52 rounded-full bg-purple-500/15 blur-3xl pointer-events-none"></div>
-
             <span className="text-xs uppercase tracking-widest text-highlight font-black mb-4 px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/25 select-none">
               Let's Collaborate
             </span>

@@ -12,75 +12,92 @@ const ProjectCard = ({
   techStack = [],
   index = 0,
 }) => {
+  const hasLive = Boolean(live && live.trim() !== "");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group glass-card rounded-xl overflow-hidden hover-lift flex flex-col justify-between"
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      className="group glass-card rounded-2xl overflow-hidden hover-lift flex flex-col justify-between border border-divider/20 hover:border-highlight/40 transition-all duration-300 shadow-xl"
     >
-      {/* Image */}
-      <div className="relative overflow-hidden h-48 bg-black/20">
+      {/* Project Image Banner */}
+      <div className="relative overflow-hidden h-52 bg-black/40">
         <img
           src={
-            image || "https://via.placeholder.com/400x200?text=Project+Preview"
+            image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
           }
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+
+        <div className="absolute top-3 left-3 z-10">
+          <span className="text-[10px] uppercase font-mono font-bold px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-highlight border border-white/10">
+            Project #{index + 1}
+          </span>
+        </div>
       </div>
 
-      {/* Content */}
+      {/* Content Body */}
       <div className="p-6 flex-1 flex flex-col justify-between">
-        {/* Title & Description */}
         <div>
-          <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">
+          <h3 className="text-xl font-black text-primary mb-2 tracking-tight group-hover:text-highlight transition-colors duration-300">
             {title}
           </h3>
-          <p className="text-sm text-gray-400 mb-4 line-clamp-3 leading-relaxed">
+          <p className="text-third text-xs sm:text-sm mb-4 line-clamp-3 leading-relaxed">
             {description}
           </p>
 
-          {/* Tech Stack */}
+          {/* Tech Stack Badges */}
           {techStack.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-4">
-              {techStack.map((tech) => (
+            <div className="flex flex-wrap gap-1.5 mb-5">
+              {techStack.slice(0, 5).map((tech) => (
                 <span
                   key={tech}
-                  className="text-xs font-mono px-2.5 py-1 rounded-full bg-highlight/10 text-highlight border border-highlight/20"
+                  className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-secondary/80 text-highlight border border-divider/20"
                 >
                   {tech}
                 </span>
               ))}
+              {techStack.length > 5 && (
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-secondary/40 text-third">
+                  +{techStack.length - 5} more
+                </span>
+              )}
             </div>
           )}
         </div>
 
-        {/* GitHub + Live Buttons at Bottom */}
-        <div className="flex gap-3 mt-4">
+        {/* GitHub Repository & Live Demo Buttons */}
+        <div className="flex items-center gap-3 pt-3 border-t border-divider/15 mt-auto">
           {repo && (
             <a
               href={repo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105"
+              className={`flex items-center justify-center gap-2 bg-secondary hover:bg-highlight hover:text-dark hover:border-red text-primary font-bold text-xs py-2.5 rounded-xl border border-divider/20 transition-all duration-300 shadow-sm ${
+                hasLive ? "flex-1" : "w-full"
+              }`}
+              title={`View ${title} source code on GitHub`}
             >
-              <GitHubIcon sx={{ fontSize: 20 }} />
-              GitHub
+              <GitHubIcon sx={{ fontSize: 16 }} />
+              <span>GitHub Repository</span>
             </a>
           )}
-          {live && (
+
+          {hasLive && (
             <a
               href={live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3  justify-center bg-highlight text-dark rounded-lg hover:bg-white  hover:text-black transition-all duration-300 font-medium shadow-lg shadow-highlight/30 hover:shadow-white/30 group/btn"
+              className="flex-1 flex items-center justify-center gap-1.5 bg-highlight text-dark font-bold text-xs py-2.5 rounded-xl hover:bg-white transition-all duration-300 shadow-md shadow-highlight/20"
+              title={`Open live site for ${title}`}
             >
-              <LaunchIcon sx={{ fontSize: 20 }} />
-              Live
+              <span>Live Demo</span>
+              <LaunchIcon sx={{ fontSize: 14 }} />
             </a>
           )}
         </div>

@@ -5,122 +5,146 @@ import SchoolIcon from "@mui/icons-material/School";
 import WorkIcon from "@mui/icons-material/Work";
 import CodeIcon from "@mui/icons-material/Code";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import LaunchIcon from "@mui/icons-material/Launch";
 
-// Choose icon based on milestone type
-const getIcon = (title) => {
+// Icon selector helper
+const getIcon = (title = "") => {
+  const lower = title.toLowerCase();
   if (
-    title.toLowerCase().includes("grade") ||
-    title.toLowerCase().includes("bachelor") ||
-    title.toLowerCase().includes("guject") ||
-    title.toLowerCase().includes("mains")
+    lower.includes("grade") ||
+    lower.includes("bachelor") ||
+    lower.includes("gujcet") ||
+    lower.includes("mains") ||
+    lower.includes("scet")
   ) {
-    return <SchoolIcon className="text-highlight" />;
-  } else if (title.toLowerCase().includes("internship")) {
-    return <WorkIcon className="text-highlight" />;
-  } else if (title.toLowerCase().includes("project")) {
-    return <CodeIcon className="text-highlight" />;
+    return <SchoolIcon sx={{ fontSize: 20 }} className="text-highlight" />;
+  } else if (lower.includes("internship") || lower.includes("intern")) {
+    return <WorkIcon sx={{ fontSize: 20 }} className="text-highlight" />;
+  } else if (lower.includes("project") || lower.includes("converse") || lower.includes("app")) {
+    return <CodeIcon sx={{ fontSize: 20 }} className="text-highlight" />;
   }
-  return <EmojiEventsIcon className="text-highlight" />;
+  return <EmojiEventsIcon sx={{ fontSize: 20 }} className="text-highlight" />;
 };
-
-// Motion variants for left/right slide animation
-const itemVariants = (side) => ({
-  hidden: { opacity: 0, x: side === "left" ? -50 : 50, y: 20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-});
 
 const LifeJourneyTimeline = () => {
   return (
-    <div className="relative w-full py-10">
-      <div className="relative max-w-6xl mx-auto">
-        {/* Vertical line in center */}
-        <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-highlight via-highlight/50 to-transparent z-0" />
+    <div className="relative w-full py-8 select-none">
+      <div className="relative max-w-5xl mx-auto">
+        {/* Central Vertical Timeline Line */}
+        <div className="hidden md:block absolute top-6 bottom-6 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-highlight via-emerald-400 to-indigo-500 rounded-full shadow-[0_0_15px_rgba(103,154,231,0.4)] z-0" />
 
-        {milestones.map((item, index) => (
-          <motion.div
-            key={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={itemVariants(item.side)}
-            className={`relative mb-12 flex flex-col md:flex-row items-center ${
-              item.side === "left" ? "md:justify-start" : "md:justify-end"
-            }`}
-          >
-            {/* Timeline Dot with Icon */}
-            <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-secondary rounded-full border-2 border-highlight z-10 shadow-lg shadow-highlight/30 items-center justify-center">
-              {getIcon(item.title)}
-            </div>
+        {/* Timeline Row Items */}
+        <div className="space-y-12 md:space-y-16">
+          {milestones.map((item, index) => {
+            const isLeft = item.side === "left" || index % 2 === 0;
 
-            {/* Milestone Card */}
-            <div
-              className={`w-full md:w-[calc(50%-3rem)] ${
-                item.side === "left"
-                  ? "md:pr-8 md:text-right"
-                  : "md:pl-8 md:text-left"
-              }`}
-            >
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
+            return (
+              <div key={index} className="relative flex flex-col md:flex-row items-center w-full group">
+                
+                {/* Central Node Badge - Positioned Exactly on Central Line */}
                 <motion.div
-                  whileHover={{ scale: 1.02, y: -4 }}
-                  transition={{ duration: 0.3 }}
-                  className="group glass-card p-6 rounded-xl border border-white/10 hover:border-highlight transition-all duration-300 shadow-lg hover:shadow-highlight/20"
+                  initial={{ scale: 0, rotate: -90 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+                  className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-2xl bg-secondary border-2 border-highlight text-highlight items-center justify-center shadow-lg shadow-highlight/25 group-hover:scale-115 group-hover:rotate-12 transition-all duration-300"
                 >
-                  {/* Icon for mobile */}
-                  <div className="md:hidden flex items-center gap-3 mb-3">
-                    {getIcon(item.title)}
-                    <h3 className="text-xl font-bold text-highlight">
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  {/* Title for desktop */}
-                  <h3 className="hidden md:block text-xl font-bold text-white group-hover:text-highlight transition-colors duration-300 mb-2">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-sm text-highlight font-medium mb-3">
-                    {item.year}
-                  </p>
-                  <p className="text-gray-300 leading-relaxed">
-                    {item.description}
-                  </p>
-
-                  {/* Hover indicator */}
-                  <div className="mt-4 flex items-center gap-2 text-sm text-gray-400 group-hover:text-highlight transition-colors">
-                    <span>Learn more</span>
-                    <svg
-                      className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
+                  {getIcon(item.title)}
                 </motion.div>
-              </a>
-            </div>
-          </motion.div>
-        ))}
 
-        {/* End dot */}
-        <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 bottom-0 w-4 h-4 bg-highlight rounded-full z-10 shadow-lg shadow-highlight/50" />
+                {/* Left Side Content Container */}
+                <div className={`w-full md:w-1/2 ${isLeft ? "md:pr-12 md:text-right" : "md:opacity-0 md:pointer-events-none"}`}>
+                  {isLeft && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.6 }}
+                      className="p-6 rounded-2xl bg-secondary/30 backdrop-blur-xl border border-divider/20 hover:border-highlight/40 transition-all duration-300 shadow-xl group-hover:shadow-highlight/15 relative overflow-hidden text-left md:text-right"
+                    >
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-highlight/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      <div className="flex flex-wrap items-center gap-2 mb-2 justify-start md:justify-end">
+                        <span className="px-3 py-0.5 text-xs font-mono font-bold rounded-full bg-highlight/15 text-highlight border border-highlight/20">
+                          {item.year}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg sm:text-xl font-black text-primary mb-2 tracking-tight group-hover:text-highlight transition-colors duration-300">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-third text-xs sm:text-sm leading-relaxed mb-3">
+                        {item.description}
+                      </p>
+
+                      {item.link && item.link !== "#" && !item.link.includes("example.com") && (
+                        <div className="mt-4 pt-2 border-t border-divider/10 flex items-center justify-start md:justify-end">
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-highlight hover:text-white transition-colors duration-300 group/link"
+                          >
+                            <span>Explore Details</span>
+                            <LaunchIcon sx={{ fontSize: 13 }} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                          </a>
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </div>
+
+                {/* Right Side Content Container */}
+                <div className={`w-full md:w-1/2 mt-4 md:mt-0 ${!isLeft ? "md:pl-12 md:text-left" : "md:opacity-0 md:pointer-events-none hidden md:block"}`}>
+                  {!isLeft && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.6 }}
+                      className="p-6 rounded-2xl bg-secondary/30 backdrop-blur-xl border border-divider/20 hover:border-highlight/40 transition-all duration-300 shadow-xl group-hover:shadow-highlight/15 relative overflow-hidden text-left"
+                    >
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-highlight/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      <div className="flex flex-wrap items-center gap-2 mb-2 justify-start">
+                        <span className="px-3 py-0.5 text-xs font-mono font-bold rounded-full bg-highlight/15 text-highlight border border-highlight/20">
+                          {item.year}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg sm:text-xl font-black text-primary mb-2 tracking-tight group-hover:text-highlight transition-colors duration-300">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-third text-xs sm:text-sm leading-relaxed mb-3">
+                        {item.description}
+                      </p>
+
+                      {item.link && item.link !== "#" && !item.link.includes("example.com") && (
+                        <div className="mt-4 pt-2 border-t border-divider/10 flex items-center justify-start">
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-highlight hover:text-white transition-colors duration-300 group/link"
+                          >
+                            <span>Explore Details</span>
+                            <LaunchIcon sx={{ fontSize: 13 }} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                          </a>
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
+
+        {/* End Node Dot */}
+        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 bottom-0 w-3.5 h-3.5 bg-highlight rounded-full z-20 shadow-lg shadow-highlight/60" />
       </div>
     </div>
   );
