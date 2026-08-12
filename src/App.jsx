@@ -6,7 +6,7 @@ import About from './pages/About.jsx';
 import Project from './pages/Project.jsx';
 import Contact from './pages/Contact.jsx';
 import Skills from './pages/Skills.jsx';
-
+import LiveChatWidget from './components/LiveChat/LiveChatWidget.jsx';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/skills" element={<Skills />} />
       </Routes>
       <AppFotter />
+      <LiveChatWidget />
     </BrowserRouter>
   );
 }

@@ -172,7 +172,7 @@ export const milestones = [
     title: "10th Grade",
     year: "March 2020",
     description:
-      "Scored 79% (96.48 %title) in SSC Board. First milestone in my academic journey.",
+      "Scored 79% (96.48 percentile) in SSC Board. First milestone in my academic journey.",
     side: "left",
     link: "https://example.com/10th-grade",
   },
@@ -180,24 +180,24 @@ export const milestones = [
     title: "12th Grade",
     year: "March 2022",
     description:
-      "Completed HSC with 77% (95.31 %title).Discovered my interest in programming.",
+      "Completed HSC with 77% (95.31 percentile). Discovered my interest in programming.",
     side: "right",
     link: "https://example.com/12th-grade",
   },
   {
-    title: "GUJECT",
+    title: "GUJCET",
     year: "April 2022",
     description:
-      "I scored 95.90 %title(92.50/120) in GUJECT, securing admission to SCET.",
+      "I scored 95.90 percentile (92.50/120) in GUJCET, securing admission to SCET.",
     side: "left",
-    link: "https://example.com/guject",
+    link: "https://example.com/gujcet",
   },
   {
-    title: "Zee Mains",
+    title: "JEE Mains",
     year: "May 2022",
-    description: "I scored 87.05%title in Zee Mains, witch a great percentile.",
+    description: "I scored 87.05 percentile in JEE Mains.",
     side: "right",
-    link: "https://example.com/zee-mains",
+    link: "https://example.com/jee-mains",
   },
   {
     title: "Bachelor’s Degree",
@@ -241,8 +241,17 @@ export const milestones = [
   },
 ];
 
+export const projectCategories = [
+  { id: "all", label: "All Projects", tag: null },
+  { id: "mern", label: "MERN Stack", tag: "mern" },
+  { id: "react", label: "React & Next.js", tag: "react" },
+  { id: "node", label: "Node & APIs", tag: "node" },
+  { id: "web", label: "Web & Tools", tag: "web" },
+];
+
 export const projects = [
   {
+    id: "converse2k25",
     title: "Converse2K25",
     repo: "https://github.com/utsavvachhani/converse2k25",
     live: "https://converse2k25.vercel.app/",
@@ -258,7 +267,8 @@ export const projects = [
     ],
   },
   {
-    title: "Cyber Sheild - Email Awerenss",
+    id: "cybershield",
+    title: "Cyber Shield - Email Awareness",
     repo: "https://github.com/utsavvachhani/emailAwareness",
     description: "Full-stack college fest site using MERN.",
     image: cyberShield,
