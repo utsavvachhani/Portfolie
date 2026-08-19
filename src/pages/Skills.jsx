@@ -37,8 +37,8 @@ const CORE_METRICS = [
 
 function Skills() {
   return (
-    <section className="relative bg-primary text-primary min-h-screen py-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
-      {/* Visual Canvas Depth Background Orbs */}
+    <section className="relative bg-primary text-primary min-h-screen pt-28 sm:pt-36 pb-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
+      {/* Background Orbs */}
       <div className="absolute top-[10%] left-[-15%] w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-10%] w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full bg-purple-500/5 blur-[110px] pointer-events-none" />
       <div className="absolute top-[50%] left-[20%] w-[250px] h-[250px] rounded-full bg-emerald-500/5 blur-[100px] pointer-events-none" />
@@ -50,10 +50,10 @@ function Skills() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center mb-16"
+          className="flex flex-col items-center text-center mb-14"
         >
-          <div className="p-3.5 rounded-2xl bg-highlight/10 border border-highlight/20 mb-4 shadow-lg shadow-highlight/5">
-            <AutoAwesomeIcon className="text-highlight" sx={{ fontSize: 36 }} />
+          <div className="p-3 rounded-2xl bg-highlight/10 border border-highlight/20 mb-3.5 shadow-md">
+            <AutoAwesomeIcon className="text-highlight" sx={{ fontSize: 34 }} />
           </div>
           <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none mb-3">
             Engineering Matrix
@@ -71,12 +71,12 @@ function Skills() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16 glass-card p-6 rounded-3xl border border-divider/30 bg-secondary/20 backdrop-blur-xl shadow-xl"
+          className="mb-14 glass-card p-6 rounded-3xl border border-divider/10 bg-secondary/30 backdrop-blur-xl shadow-xl"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {CORE_METRICS.map((item, idx) => (
-              <div key={idx} className="p-3 rounded-2xl bg-secondary/30 border border-divider/10">
-                <div className="text-xs text-third uppercase font-mono tracking-wider mb-1">
+              <div key={idx} className="p-3.5 rounded-2xl bg-secondary/50">
+                <div className="text-[11px] text-third uppercase font-mono tracking-wider mb-1">
                   {item.label}
                 </div>
                 <div className="text-sm sm:text-base font-black text-highlight">
@@ -100,7 +100,7 @@ function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-20 glass-card p-8 sm:p-12 rounded-3xl border border-divider/30 bg-secondary/30 backdrop-blur-2xl shadow-2xl relative overflow-hidden"
+          className="mt-20 glass-card p-8 sm:p-12 rounded-3xl border border-divider/10 bg-secondary/30 backdrop-blur-2xl shadow-2xl relative overflow-hidden"
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-3 text-center md:text-left">
@@ -120,7 +120,7 @@ function Skills() {
               href="https://github.com/utsavvachhani"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-2xl bg-highlight text-dark font-bold text-xs hover:bg-white transition-all shadow-lg shadow-highlight/20 flex-shrink-0"
+              className="btn-primary px-8 py-4 rounded-2xl font-bold text-xs shadow-lg flex-shrink-0"
             >
               Explore Repositories on GitHub
             </a>

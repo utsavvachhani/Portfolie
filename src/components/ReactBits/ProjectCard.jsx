@@ -12,15 +12,16 @@ const ProjectCard = ({
   techStack = [],
   index = 0,
 }) => {
-  const hasLive = Boolean(live && live.trim() !== "");
+  const hasRepo = Boolean(repo && repo.trim() !== "" && repo !== "#");
+  const hasLive = Boolean(live && live.trim() !== "" && live !== "#");
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="group glass-card rounded-2xl overflow-hidden hover-lift flex flex-col justify-between border border-divider/20 hover:border-highlight/40 transition-all duration-300 shadow-xl"
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+      className="group glass-card rounded-3xl overflow-hidden hover-lift flex flex-col justify-between border border-white/5 hover:border-highlight/30 transition-all duration-300 shadow-xl"
     >
       {/* Project Image Banner */}
       <div className="relative overflow-hidden h-52 bg-black/40">
@@ -57,7 +58,7 @@ const ProjectCard = ({
               {techStack.slice(0, 5).map((tech) => (
                 <span
                   key={tech}
-                  className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-secondary/80 text-highlight border border-divider/20"
+                  className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-secondary/60 text-highlight"
                 >
                   {tech}
                 </span>
@@ -71,36 +72,40 @@ const ProjectCard = ({
           )}
         </div>
 
-        {/* GitHub Repository & Live Demo Buttons */}
-        <div className="flex items-center gap-3 pt-3 border-t border-divider/15 mt-auto">
-          {repo && (
-            <a
-              href={repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center justify-center gap-2 bg-secondary hover:bg-highlight hover:text-dark hover:border-red text-primary font-bold text-xs py-2.5 rounded-xl border border-divider/20 transition-all duration-300 shadow-sm ${
-                hasLive ? "flex-1" : "w-full"
-              }`}
-              title={`View ${title} source code on GitHub`}
-            >
-              <GitHubIcon sx={{ fontSize: 16 }} />
-              <span>GitHub Repository</span>
-            </a>
-          )}
+        {/* GitHub Repository & Live Demo Buttons - Dynamic 4-state validation */}
+        {(hasRepo || hasLive) && (
+          <div className="flex items-center gap-3 pt-3 border-t border-divider/10 mt-auto">
+            {hasRepo && (
+              <a
+                href={repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`btn-secondary flex items-center justify-center gap-2 font-bold text-xs py-2.5 rounded-xl shadow-sm ${
+                  hasLive ? "flex-1" : "w-full"
+                }`}
+                title={`View ${title} source code on GitHub`}
+              >
+                <GitHubIcon sx={{ fontSize: 16 }} />
+                <span>GitHub Repository</span>
+              </a>
+            )}
 
-          {hasLive && (
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-1.5 bg-highlight text-dark font-bold text-xs py-2.5 rounded-xl hover:bg-white transition-all duration-300 shadow-md shadow-highlight/20"
-              title={`Open live site for ${title}`}
-            >
-              <span>Live Demo</span>
-              <LaunchIcon sx={{ fontSize: 14 }} />
-            </a>
-          )}
-        </div>
+            {hasLive && (
+              <a
+                href={live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`btn-primary flex items-center justify-center gap-1.5 font-bold text-xs py-2.5 rounded-xl shadow-md ${
+                  hasRepo ? "flex-1" : "w-full"
+                }`}
+                title={`Open live site for ${title}`}
+              >
+                <span>Live Demo</span>
+                <LaunchIcon sx={{ fontSize: 14 }} />
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </motion.div>
   );

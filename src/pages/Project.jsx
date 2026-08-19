@@ -17,7 +17,6 @@ const ProjectsSection = () => {
   // Filter projects by category and search keyword
   const filteredProjects = useMemo(() => {
     return otherProjects.filter((p) => {
-      // Category filter
       const matchesCategory =
         filter === "all"
           ? true
@@ -25,7 +24,6 @@ const ProjectsSection = () => {
           ? Boolean(p.live && p.live.trim() !== "")
           : !p.live || p.live.trim() === "";
 
-      // Search keyword filter
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !query ||
@@ -38,23 +36,23 @@ const ProjectsSection = () => {
   }, [otherProjects, filter, searchQuery]);
 
   return (
-    <section className="relative bg-primary text-primary min-h-screen py-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
-      {/* Dynamic Background Glowing Nodes */}
+    <section className="relative bg-primary text-primary min-h-screen pt-28 sm:pt-36 pb-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
+      {/* Background Orbs */}
       <div className="absolute top-[10%] left-[-15%] w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
       <div className="absolute top-[45%] right-[-15%] w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-purple-500/5 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* Page Header */}
+        {/* Page Header with Navbar Clearance */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center mb-16"
+          className="flex flex-col items-center text-center mb-14"
         >
-          <div className="p-3.5 rounded-2xl bg-highlight/10 border border-highlight/20 mb-4 shadow-lg shadow-highlight/5">
-            <FolderOpenIcon className="text-highlight" sx={{ fontSize: 38 }} />
+          <div className="p-3 rounded-2xl bg-highlight/10 border border-highlight/20 mb-3.5 shadow-md">
+            <FolderOpenIcon className="text-highlight" sx={{ fontSize: 36 }} />
           </div>
           <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none mb-3">
             Open Source Catalog
@@ -69,10 +67,10 @@ const ProjectsSection = () => {
 
         {/* Featured Project Showcase Card */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mb-20"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-16"
         >
           <div className="flex flex-col items-center text-center mb-8">
             <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
@@ -87,11 +85,11 @@ const ProjectsSection = () => {
           <FeaturedProjectCard {...featuredProject} />
         </motion.div>
 
-        {/* Interactive Filter & Search Bar */}
+        {/* Interactive Filter & Search Bar - Ambient Glass Elevation */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-12"
         >
           <div className="flex flex-col items-center text-center mb-8">
@@ -103,7 +101,7 @@ const ProjectsSection = () => {
             </h2>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/30 backdrop-blur-xl p-4 sm:p-5 rounded-3xl border border-divider/20 shadow-xl max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/30 backdrop-blur-2xl p-4 sm:p-5 rounded-3xl border border-divider/10 shadow-2xl max-w-4xl mx-auto">
             {/* Filter Pills */}
             <div className="flex flex-wrap gap-2 justify-center">
               {[
@@ -116,8 +114,8 @@ const ProjectsSection = () => {
                   onClick={() => setFilter(type)}
                   className={`px-5 py-2.5 rounded-xl font-bold text-xs transition-all duration-300 cursor-pointer ${
                     filter === type
-                      ? "bg-highlight text-dark shadow-lg shadow-highlight/25 scale-105"
-                      : "bg-secondary border border-divider/20 text-third hover:text-highlight hover:border-highlight"
+                      ? "btn-primary shadow-lg scale-105"
+                      : "btn-secondary"
                   }`}
                 >
                   {label}
@@ -133,7 +131,7 @@ const ProjectsSection = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search stack or title..."
-                className="w-full pl-10 pr-4 py-2 rounded-xl bg-primary/70 text-primary text-xs border border-divider/20 focus:border-highlight focus:outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-primary/60 text-primary text-xs border border-divider/15 focus:border-highlight focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -162,9 +160,9 @@ const ProjectsSection = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20 glass-card rounded-3xl border border-divider/20 max-w-xl mx-auto bg-secondary/20"
+            className="text-center py-16 rounded-3xl border border-divider/10 max-w-xl mx-auto bg-secondary/20"
           >
-            <p className="text-base font-bold text-third mb-4">
+            <p className="text-sm font-bold text-third mb-4">
               No repositories found matching your filter or search query.
             </p>
             <button
@@ -172,7 +170,7 @@ const ProjectsSection = () => {
                 setFilter("all");
                 setSearchQuery("");
               }}
-              className="px-5 py-2.5 rounded-xl bg-highlight text-dark font-bold text-xs"
+              className="px-5 py-2.5 rounded-xl btn-primary font-bold text-xs cursor-pointer"
             >
               Reset Filters
             </button>
@@ -180,12 +178,12 @@ const ProjectsSection = () => {
         )}
 
         {/* Bottom Interactive Stats Panel */}
-        <div className="mt-28 pt-16 border-t border-divider/25">
+        <div className="mt-24 pt-12 border-t border-divider/10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 
             <motion.div 
-              whileHover={{ y: -5 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/30 hover:border-highlight/30 transition-all duration-300 text-center shadow-lg"
+              whileHover={{ y: -4 }}
+              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
             >
               <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
                 {projects.length}
@@ -196,8 +194,8 @@ const ProjectsSection = () => {
             </motion.div>
 
             <motion.div 
-              whileHover={{ y: -5 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/30 hover:border-highlight/30 transition-all duration-300 text-center shadow-lg"
+              whileHover={{ y: -4 }}
+              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
             >
               <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
                 {projects.filter((p) => p.live && p.live.trim() !== "").length}
@@ -208,8 +206,8 @@ const ProjectsSection = () => {
             </motion.div>
 
             <motion.div 
-              whileHover={{ y: -5 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/30 hover:border-highlight/30 transition-all duration-300 text-center shadow-lg"
+              whileHover={{ y: -4 }}
+              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
             >
               <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
                 {
@@ -228,8 +226,8 @@ const ProjectsSection = () => {
             </motion.div>
 
             <motion.div 
-              whileHover={{ y: -5 }}
-              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/30 hover:border-highlight/30 transition-all duration-300 text-center shadow-lg"
+              whileHover={{ y: -4 }}
+              className="group p-6 rounded-2xl bg-secondary/30 border border-divider/10 hover:border-highlight/25 transition-all duration-300 text-center shadow-md"
             >
               <div className="text-4xl sm:text-5xl font-black text-highlight mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
                 100%

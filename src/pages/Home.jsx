@@ -45,7 +45,7 @@ function Home() {
       <HeroComp />
 
       {/* Animated Stats Banner */}
-      <section className="relative z-10 bg-secondary/30 py-12 sm:py-16 border-y border-divider/25 backdrop-blur-md">
+      <section className="relative z-10 bg-secondary/30 py-12 sm:py-16 border-y border-divider/10 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 sm:px-12 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
@@ -59,7 +59,7 @@ function Home() {
                   delay: idx * 0.1,
                   ease: "easeOut",
                 }}
-                className="text-center group flex flex-col justify-center items-center p-4 rounded-2xl hover:bg-highlight/5 border border-transparent hover:border-highlight/10 transition-all duration-300"
+                className="text-center group flex flex-col justify-center items-center p-4 rounded-2xl hover:bg-highlight/5 transition-all duration-300"
               >
                 <span className="text-3xl sm:text-4xl md:text-5xl font-black text-highlight mb-2 block tracking-tight group-hover:scale-105 transition-transform duration-300">
                   {stat.value}
@@ -74,10 +74,10 @@ function Home() {
       </section>
 
       {/* 2. Interactive Featured Projects Showcase */}
-      <FeaturedProjects />
+      <FeaturedProjects limit={6} />
 
       {/* 3. Life Journey Timeline Section */}
-      <section id="life-journey-timeline" className="relative z-10 py-24 px-6 sm:px-12 lg:px-8 bg-secondary/10 border-t border-divider/15">
+      <section id="life-journey-timeline" className="relative z-10 py-20 sm:py-24 px-6 sm:px-12 lg:px-8 bg-secondary/10 border-t border-divider/10">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center mb-12">
             <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
@@ -94,9 +94,9 @@ function Home() {
       </section>
 
       {/* 4. Tech Stack Dashboard Section */}
-      <section className="relative z-10 bg-secondary/15 py-24 px-6 sm:px-12 lg:px-8 border-t border-divider/25 overflow-hidden">
+      <section className="relative z-10 bg-secondary/15 py-20 sm:py-24 px-6 sm:px-12 lg:px-8 border-t border-divider/10 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-14">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -136,16 +136,16 @@ function Home() {
       </section>
 
       {/* 5. Call to Action Banner */}
-      <section className="relative z-10 py-24 px-6 sm:px-12 lg:px-8 border-t border-divider/25 bg-secondary/5">
+      <section className="relative z-10 py-20 sm:py-24 px-6 sm:px-12 lg:px-8 border-t border-divider/10 bg-secondary/5">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative rounded-3xl p-10 sm:p-14 md:p-16 overflow-hidden glass-card border border-divider shadow-2xl text-center flex flex-col items-center"
+            className="relative rounded-3xl p-10 sm:p-14 md:p-16 overflow-hidden glass-card border border-divider/10 shadow-2xl text-center flex flex-col items-center"
           >
-            <span className="text-xs uppercase tracking-widest text-highlight font-black mb-4 px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/25 select-none">
+            <span className="text-xs uppercase tracking-widest text-highlight font-black mb-4 px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none">
               Let's Collaborate
             </span>
 
@@ -161,7 +161,7 @@ function Home() {
 
             <Link
               to="/contact"
-              className="px-8 py-4 bg-highlight text-dark rounded-xl font-bold shadow-lg shadow-highlight/20 hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center gap-2 border border-highlight/20"
+              className="px-8 py-4 bg-highlight text-dark rounded-xl font-bold shadow-lg shadow-highlight/20 hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center gap-2"
             >
               Start a Conversation
             </Link>

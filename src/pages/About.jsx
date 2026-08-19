@@ -12,7 +12,7 @@ import LifeJourneyTimeline from "../components/ReactBits/LifeJourneyTimeline";
 import { stats } from "../content/page";
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 25 },
   visible: {
     opacity: 1,
     y: 0,
@@ -49,8 +49,8 @@ const FOCUS_AREAS = [
 
 function About() {
   return (
-    <section className="relative bg-primary text-primary min-h-screen py-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
-      {/* Visual Depth Background Glowing Orbs */}
+    <section className="relative bg-primary text-primary min-h-screen pt-28 sm:pt-36 pb-20 px-6 sm:px-12 lg:px-8 overflow-hidden">
+      {/* Background Radial Orbs */}
       <div className="absolute top-[12%] left-[-15%] w-[350px] h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-highlight/5 blur-[120px] pointer-events-none" />
       <div className="absolute top-[45%] right-[-15%] w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-purple-500/5 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-emerald-500/5 blur-[100px] pointer-events-none" />
@@ -62,10 +62,10 @@ function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center mb-16"
+          className="flex flex-col items-center text-center mb-14"
         >
-          <div className="p-3.5 rounded-2xl bg-highlight/10 border border-highlight/20 mb-4 shadow-lg shadow-highlight/5">
-            <PersonIcon className="text-highlight" sx={{ fontSize: 36 }} />
+          <div className="p-3 rounded-2xl bg-highlight/10 border border-highlight/20 mb-3.5 shadow-md">
+            <PersonIcon className="text-highlight" sx={{ fontSize: 32 }} />
           </div>
           <span className="text-xs uppercase tracking-widest text-highlight font-black px-3.5 py-1 bg-highlight/10 rounded-full border border-highlight/20 select-none mb-3">
             Full-Stack Engineer Profile
@@ -81,7 +81,7 @@ function About() {
           variants={cardVariants}
           initial="hidden"
           animate="visible"
-          className="glass-card rounded-3xl p-8 md:p-14 mb-16 border border-divider/40 shadow-2xl relative overflow-hidden group hover:border-highlight/30 transition-colors duration-300 bg-secondary/30 backdrop-blur-2xl"
+          className="glass-card rounded-3xl p-8 md:p-12 mb-16 border border-divider/10 shadow-2xl relative overflow-hidden group hover:border-highlight/30 transition-colors duration-300 bg-secondary/30 backdrop-blur-2xl"
         >
           <div className="flex flex-col lg:flex-row items-start justify-between gap-10">
             <div className="flex-1 space-y-6 text-third leading-relaxed text-base md:text-lg">
@@ -91,7 +91,7 @@ function About() {
 
               <p>
                 I am an ambitious{" "}
-                <span className="text-highlight font-bold bg-highlight/10 px-2.5 py-0.5 rounded-lg border border-highlight/20">
+                <span className="text-highlight font-bold bg-highlight/15 px-2.5 py-0.5 rounded-lg">
                   Full-Stack Developer (MERN)
                 </span>{" "}
                 and an IT undergraduate student at{" "}
@@ -113,13 +113,13 @@ function About() {
                 What started as simple web experiments has grown into a dedicated software engineering career. I'm continuously expanding my technical knowledge, optimizing production bottlenecks, and building high-impact web products.
               </p>
 
-              {/* Action Buttons inside Card */}
-              <div className="flex flex-wrap items-center gap-4 pt-4">
+              {/* Action Buttons using dedicated button design tokens */}
+              <div className="flex flex-wrap items-center gap-3 pt-4">
                 <a
                   href="https://drive.google.com/file/d/1zGjqP97eWmsi4EpYrL9FZXMl4KveP65P/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-highlight text-dark font-bold text-xs hover:bg-white transition-all shadow-md flex items-center gap-2"
+                  className="btn-primary px-6 py-3 rounded-xl font-bold text-xs shadow-md flex items-center gap-2"
                 >
                   <PictureAsPdfIcon sx={{ fontSize: 16 }} />
                   <span>Download / View CV</span>
@@ -128,7 +128,7 @@ function About() {
                   href="https://www.linkedin.com/in/vachhani-utsav-21ut75/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-secondary border border-divider/20 text-primary font-bold text-xs hover:border-highlight hover:text-highlight transition-all flex items-center gap-2"
+                  className="btn-secondary px-6 py-3 rounded-xl font-bold text-xs border border-divider/10 flex items-center gap-2 shadow-sm"
                 >
                   <LinkedInIcon sx={{ fontSize: 16 }} />
                   <span>LinkedIn Profile</span>
@@ -137,7 +137,7 @@ function About() {
                   href="https://github.com/utsavvachhani"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-secondary border border-divider/20 text-primary font-bold text-xs hover:border-highlight hover:text-highlight transition-all flex items-center gap-2"
+                  className="btn-secondary px-6 py-3 rounded-xl font-bold text-xs border border-divider/10 flex items-center gap-2 shadow-sm"
                 >
                   <GitHubIcon sx={{ fontSize: 16 }} />
                   <span>GitHub</span>
@@ -147,12 +147,12 @@ function About() {
           </div>
 
           {/* Quick Metrics Banner */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-10 border-t border-divider/25">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-10 border-t border-divider/10">
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -5 }}
-                className="p-5 rounded-2xl bg-secondary/40 border border-divider/20 hover:border-highlight/30 hover:bg-secondary/60 transition-all duration-300 text-center shadow-md"
+                whileHover={{ y: -4 }}
+                className="p-5 rounded-2xl bg-secondary/40 hover:bg-secondary/70 transition-all duration-300 text-center shadow-sm"
               >
                 <div className="text-2xl md:text-3xl font-black text-highlight mb-1 tracking-tight">
                   {stat.value}
@@ -187,9 +187,9 @@ function About() {
               <motion.div
                 key={idx}
                 whileHover={{ y: -4 }}
-                className="glass-card p-6 rounded-2xl border border-divider/20 hover:border-highlight/30 transition-all duration-300 bg-secondary/20 flex items-start gap-4 shadow-lg"
+                className="glass-card p-6 rounded-2xl border border-divider/10 hover:border-highlight/30 transition-all duration-300 bg-secondary/20 flex items-start gap-4 shadow-md"
               >
-                <div className="p-3 rounded-xl bg-secondary border border-divider/20 shadow-md">
+                <div className="p-3 rounded-xl bg-secondary/60 shadow-sm flex items-center justify-center">
                   {item.icon}
                 </div>
                 <div>
