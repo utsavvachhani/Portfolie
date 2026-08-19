@@ -1,37 +1,85 @@
 /* globals.css or index.css */
 @import "tailwindcss";
 
-
 :root {
   --color-background: #0D1117;
   --color-text: #ffffff;
   --color-bgPrimary: #010409;
   --color-bgSecondary: #0D1117;
   --color-bgHover: #1f2937;
-  --color-textHover: #006affd3;
-  --color-divider: #a4c7ce8a;
+  --color-textHover: #679ae7;
+  --color-divider: rgba(255, 255, 255, 0.05);
   --color-third: #beb6b6e3;
   --color-highlight: #679ae7;
   --color-light: #f0f0f0;
   --color-light-hover: #000000;
+
+  /* Dedicated 8 Button Color Combination System (Dark Mode) */
+  --primary-button-bg: #679ae7;
+  --primary-button-text: #0d1117;
+  --primary-hover-button-bg: #ffffff;
+  --primary-hover-button-text: #000000;
+  --secondary-button-bg: rgba(255, 255, 255, 0.06);
+  --secondary-button-text: #ffffff;
+  --secondary-hover-button-bg: #679ae7;
+  --secondary-hover-button-text: #0d1117;
+
   background-color: var(--color-background);
 }
 
 /* Light Mode Theme */
 .light-mode {
-  --color-background: #f5f5f5;
-  --color-text: #1a1a1a;
+  --color-background: #f8fafc;
+  --color-text: #0f172a;
   --color-bgPrimary: #ffffff;
-  --color-bgSecondary: #f0f0f0;
-  --color-bgHover: #e5e5e5;
+  --color-bgSecondary: #f1f5f9;
+  --color-bgHover: #e2e8f0;
   --color-textHover: #0066cc;
-  --color-divider: #d1d5db;
-  --color-third: #6b7280;
+  --color-divider: rgba(0, 0, 0, 0.05);
+  --color-third: #475569;
   --color-highlight: #0066cc;
-  --color-light: #050505;
+  --color-light: #0f172a;
   --color-light-hover: #000000;
+
+  /* Dedicated 8 Button Color Combination System (Light Mode) */
+  --primary-button-bg: #0066cc;
+  --primary-button-text: #ffffff;
+  --primary-hover-button-bg: #004b99;
+  --primary-hover-button-text: #ffffff;
+  --secondary-button-bg: rgba(0, 0, 0, 0.04);
+  --secondary-button-text: #0f172a;
+  --secondary-hover-button-bg: #0066cc;
+  --secondary-hover-button-text: #ffffff;
 }
 
+/* Dedicated Button Utility Classes with Ambient Drop Shadows */
+.btn-primary {
+  background-color: var(--primary-button-bg);
+  color: var(--primary-button-text);
+  box-shadow: 0 4px 14px rgba(103, 154, 231, 0.25);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover-button-bg);
+  color: var(--primary-hover-button-text);
+  box-shadow: 0 6px 20px rgba(103, 154, 231, 0.4);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-button-bg);
+  color: var(--secondary-button-text);
+  border: 1px solid var(--color-divider);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-hover-button-bg);
+  color: var(--secondary-hover-button-text);
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(103, 154, 231, 0.3);
+}
 
 .text-primary {
   color: var(--color-text);
@@ -92,36 +140,35 @@
   color: var(--color-textHover);
 }
 
-/* Glass Morphism Card Effect */
+/* Soft Ambient Glass Card Effect */
 .glass-card {
-  background: rgba(13, 17, 23, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  background: rgba(13, 17, 23, 0.65);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 35px -10px rgba(0, 0, 0, 0.5);
 }
 
 .glass-card:hover {
-  background: rgba(13, 17, 23, 0.8);
-  border-color: var(--color-highlight);
-  box-shadow: 0 8px 16px rgba(103, 154, 231, 0.2);
+  background: rgba(13, 17, 23, 0.85);
+  border-color: rgba(103, 154, 231, 0.25);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6), 0 0 25px rgba(103, 154, 231, 0.15);
 }
 
 /* Hover Lift Effect */
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hover-lift:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
 }
 
-/* Animations for Projects Page */
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -129,12 +176,9 @@
 }
 
 @keyframes gradient {
-
-  0%,
-  100% {
+  0%, 100% {
     background-position: 0% 50%;
   }
-
   50% {
     background-position: 100% 50%;
   }
@@ -145,17 +189,16 @@
   animation: gradient 3s ease infinite;
 }
 
-
 .light-mode .glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
 }
 
 .light-mode .glass-card:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: var(--color-highlight);
-  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.2);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(0, 102, 204, 0.25);
+  box-shadow: 0 20px 45px -12px rgba(0, 102, 204, 0.15);
 }
 
 /* Fade In Animation */
@@ -163,7 +206,6 @@
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -173,7 +215,13 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Accessible Smooth Focus Indicators */
+:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+}
+
 /* Smooth theme transition */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }

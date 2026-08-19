@@ -29,6 +29,7 @@ const LiveChatWidget = () => {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [unreadCount, setUnreadCount] = useState(1);
+  const [showTooltip, setShowTooltip] = useState(true);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -39,6 +40,7 @@ const LiveChatWidget = () => {
     if (isOpen) {
       scrollToBottom();
       setUnreadCount(0);
+      setShowTooltip(false);
     }
   }, [messages, isOpen]);
 
@@ -115,6 +117,26 @@ const LiveChatWidget = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
       
+      {/* Teaser Tooltip Popover */}
+      <AnimatePresence>
+        {!isOpen && showTooltip && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            className="mb-2 bg-secondary/95 text-primary text-xs font-extrabold px-3.5 py-2 rounded-2xl border border-divider/10 shadow-xl pointer-events-auto flex items-center gap-2"
+          >
+            <span>💬 Ask Utsav AI Anything!</span>
+            <button
+              onClick={() => setShowTooltip(false)}
+              className="text-third hover:text-primary text-[10px] ml-1 cursor-pointer"
+            >
+              ✕
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Expanded Live Chat Window */}
       <AnimatePresence>
         {isOpen && (
@@ -123,10 +145,10 @@ const LiveChatWidget = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.7, y: 30 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="w-[90vw] sm:w-[380px] h-[500px] mb-4 rounded-3xl glass-card border border-divider/30 shadow-2xl overflow-hidden flex flex-col pointer-events-auto bg-secondary/95 backdrop-blur-2xl"
+            className="w-[90vw] sm:w-[380px] h-[500px] mb-4 rounded-3xl glass-card border border-divider/10 shadow-2xl overflow-hidden flex flex-col pointer-events-auto bg-secondary/95 backdrop-blur-2xl"
           >
             {/* Header */}
-            <div className="p-4 bg-gradient-to-r from-highlight/20 via-primary to-emerald-500/20 border-b border-divider/20 flex items-center justify-between">
+            <div className="p-4 bg-gradient-to-r from-highlight/15 via-primary to-emerald-500/15 border-b border-divider/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <div className="w-9 h-9 rounded-2xl bg-highlight text-dark flex items-center justify-center font-bold shadow-md">
@@ -180,13 +202,13 @@ const LiveChatWidget = () => {
                       className={`max-w-[85%] p-3.5 rounded-2xl text-xs leading-relaxed ${
                         msg.sender === "user"
                           ? "bg-highlight text-dark font-medium rounded-br-none shadow-md"
-                          : "bg-primary/80 border border-divider/20 text-primary rounded-bl-none shadow-sm whitespace-pre-line"
+                          : "bg-primary/70 text-primary rounded-bl-none shadow-sm whitespace-pre-line"
                       }`}
                     >
                       <div>{msg.text}</div>
                       <div
                         className={`text-[9px] mt-1.5 text-right ${
-                          msg.sender === "user" ? "text-dark/70" : "text-third/70"
+                          msg.sender === "user" ? "text-dark/70" : "text-third"
                         }`}
                       >
                         {msg.time}
@@ -194,20 +216,20 @@ const LiveChatWidget = () => {
                     </div>
 
                     {msg.sender === "user" && (
-                      <div className="w-7 h-7 rounded-xl bg-secondary text-primary flex items-center justify-center flex-shrink-0 text-xs font-bold border border-divider/20">
+                      <div className="w-7 h-7 rounded-xl bg-secondary text-primary flex items-center justify-center flex-shrink-0 text-xs font-bold">
                         <PersonIcon sx={{ fontSize: 14 }} />
                       </div>
                     )}
                   </div>
 
-                  {/* Interactive Quick Option Chips appended under Bot Message */}
+                  {/* Interactive Quick Option Chips */}
                   {msg.sender === "bot" && msg.options && msg.options.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 mt-2.5 pl-9 max-w-[90%]">
                       {msg.options.map((opt) => (
                         <button
                           key={opt.id}
                           onClick={() => handleOptionClick(opt)}
-                          className="px-3 py-1.5 rounded-xl bg-highlight/10 hover:bg-highlight hover:text-dark text-highlight text-[11px] font-bold border border-highlight/25 transition-all duration-300 shadow-sm cursor-pointer active:scale-95 text-left"
+                          className="px-3 py-1.5 rounded-xl bg-highlight/15 hover:bg-highlight hover:text-dark text-highlight text-[11px] font-bold transition-all duration-300 shadow-sm cursor-pointer active:scale-95 text-left"
                         >
                           {opt.label}
                         </button>
@@ -226,7 +248,7 @@ const LiveChatWidget = () => {
                   <div className="w-7 h-7 rounded-xl bg-highlight/20 text-highlight flex items-center justify-center flex-shrink-0">
                     <SmartToyIcon sx={{ fontSize: 14 }} />
                   </div>
-                  <div className="bg-primary/80 border border-divider/20 p-3 rounded-2xl rounded-bl-none flex items-center gap-1.5">
+                  <div className="bg-primary/70 p-3 rounded-2xl rounded-bl-none flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce" style={{ animationDelay: "0ms" }} />
                     <span className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce" style={{ animationDelay: "150ms" }} />
                     <span className="w-1.5 h-1.5 rounded-full bg-highlight animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -240,14 +262,14 @@ const LiveChatWidget = () => {
             {/* Input Form */}
             <form
               onSubmit={handleSendMessage}
-              className="p-3 border-t border-divider/20 bg-primary/40 flex items-center gap-2"
+              className="p-3 border-t border-divider/10 bg-primary/40 flex items-center gap-2"
             >
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Ask a question or select an option..."
-                className="flex-1 px-3.5 py-2.5 rounded-xl bg-secondary text-primary text-xs border border-divider/20 focus:border-highlight focus:outline-none transition-colors"
+                className="flex-1 px-3.5 py-2.5 rounded-xl bg-secondary/70 text-primary text-xs border border-divider/10 focus:border-highlight focus:outline-none transition-colors"
               />
               <button
                 type="submit"
@@ -260,15 +282,15 @@ const LiveChatWidget = () => {
         )}
       </AnimatePresence>
 
-      {/* Floating Trigger Button with Breathing / Pulse Animation */}
+      {/* Floating Trigger Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="relative p-4 rounded-2xl bg-highlight text-dark font-extrabold shadow-[0_0_25px_rgba(103,154,231,0.5)] cursor-pointer pointer-events-auto border border-highlight/40 flex items-center justify-center group"
+        className="relative p-4 rounded-2xl bg-highlight text-dark font-extrabold shadow-[0_0_25px_rgba(103,154,231,0.4)] cursor-pointer pointer-events-auto flex items-center justify-center group"
         aria-label="Open Live Chat"
       >
-        <span className="absolute inset-0 rounded-2xl bg-highlight opacity-40 animate-ping pointer-events-none" />
+        <span className="absolute inset-0 rounded-2xl bg-highlight opacity-30 animate-ping pointer-events-none" />
 
         {isOpen ? (
           <CloseIcon sx={{ fontSize: 24 }} className="z-10" />

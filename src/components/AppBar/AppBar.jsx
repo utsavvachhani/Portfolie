@@ -14,7 +14,7 @@ function AppBar() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Scroll handler for dynamic styles
+  // Scroll handler for dynamic navbar glass effect
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -45,11 +45,9 @@ function AppBar() {
     setIsDarkMode(newMode);
 
     if (newMode) {
-      // Dark mode
       document.documentElement.classList.remove("light-mode");
       localStorage.setItem("theme", "dark");
     } else {
-      // Light mode
       document.documentElement.classList.add("light-mode");
       localStorage.setItem("theme", "light");
     }
@@ -57,28 +55,28 @@ function AppBar() {
 
   return (
     <header
-      className={`w-full bg-primary text-primary px-4 sticky top-0 z-50 transition-all duration-500 ${
+      className={`w-full text-primary px-4 sm:px-6 sticky top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "py-3 bg-opacity-85 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b border-divider/10"
-          : "py-5 bg-opacity-95 backdrop-blur-sm shadow-sm border-b border-transparent"
+          ? "py-2.5 sm:py-3 bg-primary/85 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+          : "py-3.5 sm:py-4 bg-primary backdrop-blur-xl"
       }`}
     >
       <div className="flex items-center justify-between max-w-screen-xl mx-auto">
+        
         {/* Left: Logo and Title */}
         <div className="flex items-center space-x-3">
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="relative flex items-center justify-center p-1.5 rounded-xl bg-gradient-to-tr from-highlight/10 to-cyan-500/10 group-hover:scale-105 transition-all duration-300 shadow-md">
+            <div className="relative flex items-center justify-center p-1.5 rounded-xl bg-highlight/10 group-hover:scale-105 transition-all duration-300">
               <img
                 src={logo}
                 alt="Logo"
-                className="h-9 w-9 sm:h-11 sm:w-11 group-hover:rotate-12 transition-transform duration-500"
+                className="h-9 w-9 sm:h-10 sm:w-10 group-hover:rotate-12 transition-transform duration-500"
               />
-              <span className="absolute inset-0 rounded-xl bg-highlight/10 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300"></span>
             </div>
             <div className="flex flex-col justify-center">
               <Typography
                 variant="h6"
-                className="text-sm sm:text-lg font-black tracking-tight text-primary drop-shadow-sm"
+                className="text-sm sm:text-base font-black tracking-tight text-primary drop-shadow-sm"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 Utsav Vachhani
@@ -90,32 +88,26 @@ function AppBar() {
           </Link>
         </div>
 
-        {/* Center: Navigation Links (Desktop) */}
-        <nav className="hidden lg:flex items-center space-x-1">
+        {/* Center: Sleek Borderless Navigation Links Container (Desktop) */}
+        <nav className="hidden lg:flex items-center space-x-1 bg-secondary/60 backdrop-blur-2xl px-4 py-2 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
           {pages.map((page) => (
             <Link
               key={page.name}
               to={page.href}
-              className="relative flex items-center space-x-2 px-4 py-2.5 text-primary font-semibold rounded-xl hover:text-highlight transition-colors duration-300 group"
+              className="relative flex items-center space-x-2 px-4 py-2 text-primary font-semibold rounded-full hover:text-highlight transition-all duration-300 group"
             >
-              {/* Subtle hover background highlight */}
-              <span className="absolute inset-0 bg-highlight/5 opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-300 scale-95 group-hover:scale-100"></span>
-              
-              <span className="text-highlight group-hover:scale-110 transition-transform duration-300 z-10 flex items-center">
+              <span className="text-highlight group-hover:scale-110 transition-transform duration-300 flex items-center">
                 {page.icon}
               </span>
-              <span className="z-10 text-sm font-medium">{page.name}</span>
-              
-              {/* Bottom slide line indicator */}
-              <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-highlight scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center z-10"></span>
+              <span className="text-xs font-bold tracking-wide">{page.name}</span>
             </Link>
           ))}
         </nav>
 
         {/* Right: Social Links + Theme Toggle (Desktop) */}
-        <div className="hidden md:flex items-center space-x-5">
+        <div className="hidden md:flex items-center space-x-3">
           {/* Social Links */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1.5">
             {socialLinks.slice(0, 4).map(({ href, icon, label, textColor }) => (
               <a
                 key={label}
@@ -123,9 +115,9 @@ function AppBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={label}
-                className="p-2 rounded-xl text-primary/70 hover:text-white bg-secondary/30 hover:bg-secondary border border-divider/10 hover:border-highlight/20 hover:scale-110 active:scale-95 transition-all duration-300 group flex items-center justify-center"
+                className="group p-2 rounded-xl text-primary/70 bg-secondary/40 hover:bg-secondary/80 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer"
               >
-                <span className={`transition-colors duration-300 ${textColor} flex items-center justify-center`}>
+                <span className={`transition-all duration-300 ${textColor} flex items-center justify-center`}>
                   {icon}
                 </span>
               </a>
@@ -135,62 +127,49 @@ function AppBar() {
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-xl bg-secondary/50 hover:bg-secondary hover:text-highlight transition-all duration-300 border border-divider/10 hover:border-highlight/30 hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
+            className="p-2.5 rounded-xl bg-secondary/50 hover:bg-secondary hover:text-highlight transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center"
             aria-label="Toggle theme"
           >
             <AnimatePresence mode="wait">
               <motion.div
                 key={isDarkMode ? "dark" : "light"}
-                initial={{ y: -10, opacity: 0, rotate: -45 }}
+                initial={{ y: -6, opacity: 0, rotate: -45 }}
                 animate={{ y: 0, opacity: 1, rotate: 0 }}
-                exit={{ y: 10, opacity: 0, rotate: 45 }}
+                exit={{ y: 6, opacity: 0, rotate: 45 }}
                 transition={{ duration: 0.2 }}
                 className="flex items-center justify-center"
               >
                 {isDarkMode ? (
-                  <LightModeIcon sx={{ fontSize: 20 }} className="text-yellow-400" />
+                  <LightModeIcon className="text-amber-400" sx={{ fontSize: 20 }} />
                 ) : (
-                  <DarkModeIcon sx={{ fontSize: 20 }} className="text-indigo-400" />
+                  <DarkModeIcon className="text-indigo-400" sx={{ fontSize: 20 }} />
                 )}
               </motion.div>
             </AnimatePresence>
           </button>
         </div>
 
-        {/* Mobile: Theme Toggle + Menu Toggle */}
-        <div className="md:hidden flex items-center space-x-2">
-          {/* Theme Toggle (Mobile) */}
+        {/* Mobile Menu & Theme Toggle */}
+        <div className="flex md:hidden items-center space-x-2">
           <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-xl bg-secondary/50 hover:bg-secondary hover:text-highlight transition-all duration-300 border border-divider/10 hover:border-highlight/30 active:scale-95 flex items-center justify-center cursor-pointer"
+            className="p-2 rounded-xl bg-secondary/50 hover:bg-secondary text-primary cursor-pointer flex items-center justify-center"
             aria-label="Toggle theme"
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={isDarkMode ? "dark" : "light"}
-                initial={{ y: -10, opacity: 0, rotate: -45 }}
-                animate={{ y: 0, opacity: 1, rotate: 0 }}
-                exit={{ y: 10, opacity: 0, rotate: 45 }}
-                transition={{ duration: 0.2 }}
-                className="flex items-center justify-center"
-              >
-                {isDarkMode ? (
-                  <LightModeIcon sx={{ fontSize: 20 }} className="text-yellow-400" />
-                ) : (
-                  <DarkModeIcon sx={{ fontSize: 20 }} className="text-indigo-400" />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            {isDarkMode ? (
+              <LightModeIcon className="text-amber-400" sx={{ fontSize: 18 }} />
+            ) : (
+              <DarkModeIcon className="text-indigo-400" sx={{ fontSize: 18 }} />
+            )}
           </button>
 
-          {/* Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-xl hover:bg-secondary/50 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer"
-            aria-label="Toggle menu"
+            className="p-2 rounded-xl bg-secondary/50 hover:bg-secondary text-primary cursor-pointer flex items-center justify-center"
+            aria-label="Open navigation menu"
           >
             {isMobileMenuOpen ? (
-              <CloseIcon sx={{ fontSize: 24 }} className="text-highlight" />
+              <CloseIcon sx={{ fontSize: 24 }} />
             ) : (
               <MenuIcon sx={{ fontSize: 24 }} />
             )}
@@ -198,72 +177,42 @@ function AppBar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0, y: -20 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden mt-4 bg-secondary p-6 rounded-2xl space-y-6 border border-divider/10 overflow-hidden shadow-2xl"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden mt-3 pt-3 border-t border-divider/10 bg-secondary/95 backdrop-blur-2xl rounded-2xl p-4 shadow-xl overflow-hidden"
           >
-            {/* Navigation Links */}
-            <div className="space-y-1">
-              <h3 className="text-xs font-bold text-highlight uppercase tracking-wider mb-2 px-3">
-                Navigation
-              </h3>
-              {pages.map(({ name, href, icon }, idx) => (
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  key={name}
+            <nav className="flex flex-col space-y-2">
+              {pages.map((page) => (
+                <Link
+                  key={page.name}
+                  to={page.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center space-x-3 px-4 py-3 text-primary font-bold rounded-xl hover:bg-highlight/10 hover:text-highlight transition-all"
                 >
-                  <Link
-                    to={href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center space-x-3 text-primary hover:text-highlight transition-all duration-300 py-2.5 px-3 rounded-xl hover:bg-primary/40 group"
-                  >
-                    <span className="text-highlight group-hover:scale-115 transition-transform duration-300 flex items-center">
-                      {icon}
-                    </span>
-                    <span className="font-semibold text-sm">{name}</span>
-                  </Link>
-                </motion.div>
+                  <span className="text-highlight">{page.icon}</span>
+                  <span className="text-sm">{page.name}</span>
+                </Link>
               ))}
-            </div>
+            </nav>
 
-            {/* Divider */}
-            <div className="border-t border-divider/10"></div>
-
-            {/* Social Links */}
-            <div className="space-y-3">
-              <h3 className="text-xs font-bold text-highlight uppercase tracking-wider mb-2 px-3">
-                Connect
-              </h3>
-              <div className="grid grid-cols-2 gap-2">
-                {socialLinks.map(({ href, icon, label, textColor }, idx) => (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: idx * 0.04 }}
-                    key={label}
-                  >
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-2 text-primary hover:text-highlight transition-all duration-300 py-2.5 px-3 rounded-xl hover:bg-primary/40 group"
-                    >
-                      <span className={`text-highlight transition-transform duration-300 ${textColor} group-hover:scale-110 flex items-center`}>
-                        {icon}
-                      </span>
-                      <span className="text-xs font-medium">{label}</span>
-                    </a>
-                  </motion.div>
-                ))}
-              </div>
+            <div className="mt-4 pt-3 border-t border-divider/10 flex items-center justify-around">
+              {socialLinks.slice(0, 4).map(({ href, icon, label, textColor }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl bg-primary/40 text-primary hover:text-highlight transition-all"
+                >
+                  <span className={textColor}>{icon}</span>
+                </a>
+              ))}
             </div>
           </motion.div>
         )}

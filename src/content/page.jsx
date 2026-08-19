@@ -35,43 +35,43 @@ export const socialLinks = [
     href: "https://github.com/utsavvachhani",
     icon: <GitHubIcon />,
     label: "GitHub",
-    textColor: "group-hover:text-blue-500",
-    borderColor: "hover:border-blue-500",
+    textColor: "group-hover:text-white hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]",
+    borderColor: "hover:border-white",
   },
   {
     href: "https://www.instagram.com/vachhani_utsav",
     icon: <InstagramIcon />,
     label: "Instagram",
-    textColor: "group-hover:text-pink-500",
-    borderColor: "hover:border-pink-500",
+    textColor: "group-hover:text-[#e4405f] hover:text-[#e4405f] hover:drop-shadow-[0_0_10px_rgba(228,64,95,0.7)]",
+    borderColor: "hover:border-[#e4405f]",
   },
   {
     href: "https://x.com/ut_vachhani2115?t=EItJcQaI9oTviQcRAWBdzQ&s=09",
     icon: <TwitterIcon />,
     label: "X (Twitter)",
-    textColor: "group-hover:text-blue-500",
-    borderColor: "hover:border-blue-500",
+    textColor: "group-hover:text-[#1da1f2] hover:text-[#1da1f2] hover:drop-shadow-[0_0_10px_rgba(29,161,242,0.7)]",
+    borderColor: "hover:border-[#1da1f2]",
   },
   {
     href: "https://www.facebook.com/share/XuhgoNWwae9jKxkj/?mibextid=qi2Omg",
     icon: <FacebookIcon />,
     label: "Facebook",
-    textColor: "group-hover:text-blue-600",
-    borderColor: "hover:border-blue-600",
+    textColor: "group-hover:text-[#1877f2] hover:text-[#1877f2] hover:drop-shadow-[0_0_10px_rgba(24,119,242,0.7)]",
+    borderColor: "hover:border-[#1877f2]",
   },
   {
     href: "https://drive.google.com/file/d/1zGjqP97eWmsi4EpYrL9FZXMl4KveP65P/view?usp=drive_link",
     icon: <PictureAsPdfIcon />,
     label: "View CV",
-    textColor: "group-hover:text-red-700",
-    borderColor: "hover:border-red-700",
+    textColor: "group-hover:text-[#ef4444] hover:text-[#ef4444] hover:drop-shadow-[0_0_10px_rgba(239,68,68,0.7)]",
+    borderColor: "hover:border-[#ef4444]",
   },
   {
     href: "https://www.linkedin.com/in/vachhani-utsav-21ut75/",
     icon: <LinkedInIcon />,
     label: "LinkedIn",
-    textColor: "group-hover:text-blue-700",
-    borderColor: "hover:border-blue-700",
+    textColor: "group-hover:text-[#0a66c2] hover:text-[#0a66c2] hover:drop-shadow-[0_0_10px_rgba(10,102,194,0.7)]",
+    borderColor: "hover:border-[#0a66c2]",
   },
 ];
 
@@ -169,75 +169,72 @@ export const skillCategories = [
 
 export const milestones = [
   {
-    title: "10th Grade",
-    year: "March 2020",
+    title: "Internship at CyberSecurity Umrella",
+    year: "January - April 2026",
     description:
-      "Scored 79% (96.48 percentile) in SSC Board. First milestone in my academic journey.",
-    side: "left",
-    link: "https://example.com/10th-grade",
-  },
-  {
-    title: "12th Grade",
-    year: "March 2022",
-    description:
-      "Completed HSC with 77% (95.31 percentile). Discovered my interest in programming.",
-    side: "right",
-    link: "https://example.com/12th-grade",
-  },
-  {
-    title: "GUJCET",
-    year: "April 2022",
-    description:
-      "I scored 95.90 percentile (92.50/120) in GUJCET, securing admission to SCET.",
-    side: "left",
-    link: "https://example.com/gujcet",
-  },
-  {
-    title: "JEE Mains",
-    year: "May 2022",
-    description: "I scored 87.05 percentile in JEE Mains.",
-    side: "right",
-    link: "https://example.com/jee-mains",
-  },
-  {
-    title: "Bachelor’s Degree",
-    year: "2022-2026",
-    description:
-      "Pursuing B.Tech in IT. Learned frontend, backend & built multiple projects.",
-    side: "left",
-    link: "https://scet.ac.in/",
-  },
-  {
-    title: "Internship at Prodigy Infotech",
-    year: "15th July, 2024 - 15th August, 2024",
-    description:
-      "Worked as a Software Development Intern. Built real-world apps and improved my Python skills.",
-    side: "right",
-    link: "https://www.linkedin.com/posts/vachhani-utsav-21ut75_lor-from-prodigy-infotech-activity-7230001521596235776-9U_R?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaZtIoBvpn8y8qc5DZ888BlaC-9deFfycw",
-  },
-  {
-    title: "Internship at CodSoft",
-    year: "20th August, 2024 - 20th September, 2024",
-    description:
-      "Created landing pages, portfolios, calculators and contributed to open-source.",
-    side: "left",
-    link: "https://www.linkedin.com/posts/vachhani-utsav-21ut75_vachhani-utsavcodsoft-activity-7244194368302051328-RKHo?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaZtIoBvpn8y8qc5DZ888BlaC-9deFfycw",
-  },
-  {
-    title: "Converse2K24 Project",
-    year: "September 2024",
-    description:
-      "Built a full-stack event registration site for a college fest using React + Firebase + Google Sheets.",
-    side: "right",
-    link: "https://github.com/utsavvachhani/converse2k24",
+      "At CyberSecurity Umrella, I contributed as a Full Stack Intern, building scalable web applications using React, Node.js, and Express.js. This role enhanced my expertise in modern web technologies and software development practices.",
   },
   {
     title: "Converse2K25 Project",
     year: "August 2025",
     description:
       "Built a full-stack event registration site for a college fest using MERN.",
-    side: "left",
     link: "https://github.com/utsavvachhani/converse2k25",
+  },
+  {
+    title: "Converse2K24 Project",
+    year: "September 2024",
+    description:
+      "Built a full-stack event registration site for a college fest using React + Firebase + Google Sheets.",
+    link: "https://github.com/utsavvachhani/converse2k24",
+  },
+  {
+    title: "Internship at CodSoft",
+    year: "20th August, 2024 - 20th September, 2024",
+    description:
+      "Created landing pages, portfolios, calculators and contributed to open-source.",
+    link: "https://www.linkedin.com/posts/vachhani-utsav-21ut75_vachhani-utsavcodsoft-activity-7244194368302051328-RKHo?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaZtIoBvpn8y8qc5DZ888BlaC-9deFfycw",
+  },
+  {
+    title: "Internship at Prodigy Infotech",
+    year: "15th July, 2024 - 15th August, 2024",
+    description:
+      "Worked as a Software Development Intern. Built real-world apps and improved my Python skills.",
+    link: "https://www.linkedin.com/posts/vachhani-utsav-21ut75_lor-from-prodigy-infotech-activity-7230001521596235776-9U_R?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaZtIoBvpn8y8qc5DZ888BlaC-9deFfycw",
+  },
+  {
+    title: "Bachelor’s Degree",
+    year: "2022-2026",
+    description:
+      "Pursuing B.Tech in IT. Learned frontend, backend & built multiple projects.",
+    link: "https://scet.ac.in/",
+  },
+  {
+    title: "JEE Mains",
+    year: "May 2022",
+    description: "I scored 87.05 percentile in JEE Mains.",
+    link: "https://example.com/jee-mains",
+  },
+  {
+    title: "GUJCET",
+    year: "April 2022",
+    description:
+      "I scored 95.90 percentile (92.50/120) in GUJCET, securing admission to SCET.",
+    link: "https://example.com/gujcet",
+  },
+  {
+    title: "12th Grade",
+    year: "March 2022",
+    description:
+      "Completed HSC with 77% (95.31 percentile). Discovered my interest in programming.",
+    link: "https://example.com/12th-grade",
+  },
+  {
+    title: "10th Grade",
+    year: "March 2020",
+    description:
+      "Scored 79% (96.48 percentile) in SSC Board. First milestone in my academic journey.",
+    link: "https://example.com/10th-grade",
   },
 ];
 
@@ -291,7 +288,7 @@ export const projects = [
   },
   {
     title: "WhatsApp-Web-Js",
-    repo: "https://github.com/utsavvachhani/whatsapp-nodejs-message",
+    // repo: "https://github.com/utsavvachhani/whatsapp-nodejs-message",
     description: "explor thethird party API for send message to whatsapp",
     image: whatsappweb,
     techStack: [
@@ -310,7 +307,7 @@ export const projects = [
   },
   {
     title: "Task Manger App",
-    repo: "https://github.com/utsavvachhani/task_manger_app/tree/mern_version",
+    // repo: "https://github.com/utsavvachhani/task_manger_app/tree/mern_version",
     description: "A task manager app for managing daily tasks.",
     image: taskmanger,
     techStack: [

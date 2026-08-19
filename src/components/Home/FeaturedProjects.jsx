@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { projects, projectCategories } from "../../content/page.jsx";
 import SearchIcon from "@mui/icons-material/Search";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -8,8 +9,9 @@ import StorageIcon from "@mui/icons-material/Storage";
 import HttpIcon from "@mui/icons-material/Http";
 import CodeIcon from "@mui/icons-material/Code";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-const FeaturedProjects = () => {
+const FeaturedProjects = ({ limit = 6 }) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedProject, setExpandedProject] = useState(null);
@@ -17,7 +19,6 @@ const FeaturedProjects = () => {
   // Filter projects dynamically linked with projectCategories and techStack array
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
-      // Search matching across title, description, and techStack array
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !query ||
@@ -28,7 +29,6 @@ const FeaturedProjects = () => {
       if (!matchesSearch) return false;
       if (selectedCategory === "all") return true;
 
-      // Category matching dynamically linked with techStack values
       const techList = project.techStack?.map((t) => t.toLowerCase()) || [];
 
       if (selectedCategory === "mern") {
@@ -69,8 +69,16 @@ const FeaturedProjects = () => {
     });
   }, [selectedCategory, searchQuery]);
 
+  // Slice displayed projects according to limit prop (e.g. 6 projects on Home page)
+  const displayedProjects = useMemo(() => {
+    if (limit && typeof limit === "number") {
+      return filteredProjects.slice(0, limit);
+    }
+    return filteredProjects;
+  }, [filteredProjects, limit]);
+
   return (
-    <section id="featured-projects" className="relative z-10 py-24 px-6 sm:px-12 lg:px-8 bg-primary border-t border-divider/15">
+    <section id="featured-projects" className="relative z-10 pt-28 md:pt-36 pb-20 px-6 sm:px-12 lg:px-8 bg-primary border-t border-divider/5">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
@@ -79,7 +87,7 @@ const FeaturedProjects = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs uppercase tracking-widest text-highlight font-black px-4 py-1.5 rounded-full bg-highlight/10 border border-highlight/25 select-none inline-block mb-3"
+            className="text-xs uppercase tracking-widest text-highlight font-black px-4 py-1.5 rounded-full bg-highlight/10 border border-highlight/20 select-none inline-block mb-3"
           >
             Software Showcase
           </motion.span>
@@ -103,27 +111,31 @@ const FeaturedProjects = () => {
           </motion.p>
         </div>
 
-        {/* Filter Bar & Live Search */}
-        <div className="mb-12 flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/40 backdrop-blur-xl p-4 sm:p-5 rounded-3xl border border-divider/20 shadow-xl">
+        {/* Clean Borderless Glass Filter & Search Bar */}
+        <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/40 backdrop-blur-2xl p-4 sm:p-5 rounded-3xl border border-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.35)]">
           
-          {/* Category Filter Pills exported from page.jsx */}
+          {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-            {projectCategories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${
-                  selectedCategory === cat.id
-                    ? "bg-highlight text-dark shadow-md shadow-highlight/20 scale-105"
-                    : "bg-secondary text-third hover:text-primary hover:bg-secondary/80 border border-divider/10"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+            {projectCategories.map((cat) => {
+              const isActive = selectedCategory === cat.id;
+
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? "bg-highlight text-dark shadow-[0_4px_20px_rgba(103,154,231,0.35)] scale-105"
+                      : "bg-secondary/60 text-third hover:text-primary hover:bg-secondary"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Search Input Box */}
+          {/* Live Search Box */}
           <div className="relative w-full md:w-72">
             <SearchIcon sx={{ fontSize: 18 }} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-third" />
             <input
@@ -131,12 +143,12 @@ const FeaturedProjects = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search stack or title..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-primary/70 text-primary text-xs border border-divider/20 focus:border-highlight focus:outline-none transition-colors"
+              className="w-full pl-10 pr-8 py-2.5 rounded-xl bg-primary/70 text-primary text-xs border border-white/5 focus:border-highlight/50 focus:outline-none transition-colors shadow-inner"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-third hover:text-primary"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-third hover:text-primary cursor-pointer"
               >
                 ✕
               </button>
@@ -147,7 +159,7 @@ const FeaturedProjects = () => {
         {/* Project Results Count Indicator */}
         <div className="mb-6 flex items-center justify-between text-xs text-third font-medium px-2">
           <span>
-            Showing <strong className="text-highlight font-black">{filteredProjects.length}</strong> project{filteredProjects.length === 1 ? "" : "s"}
+            Showing <strong className="text-highlight font-black">{displayedProjects.length}</strong> of <strong className="text-primary font-bold">{projects.length}</strong> project{projects.length === 1 ? "" : "s"}
           </span>
           <span className="flex items-center gap-1">
             <FilterListIcon sx={{ fontSize: 14 }} className="text-highlight" />
@@ -158,19 +170,20 @@ const FeaturedProjects = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => {
+            {displayedProjects.map((project, index) => {
               const isExpanded = expandedProject === project.title;
-              const hasLive = Boolean(project.live && project.live.trim() !== "");
+              const hasRepo = Boolean(project.repo && project.repo.trim() !== "" && project.repo !== "#");
+              const hasLive = Boolean(project.live && project.live.trim() !== "" && project.live !== "#");
 
               return (
                 <motion.div
                   key={project.id || project.title || index}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="group glass-card rounded-3xl overflow-hidden hover-lift flex flex-col justify-between border border-divider/20 hover:border-highlight/40 transition-all duration-500 shadow-xl relative"
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35, delay: index * 0.05 }}
+                  className="group glass-card rounded-3xl overflow-hidden hover-lift flex flex-col justify-between border border-white/5 hover:border-highlight/30 transition-all duration-300 shadow-xl relative"
                 >
                   {/* Top Image Banner */}
                   <div className="relative overflow-hidden h-52 bg-black/40">
@@ -179,13 +192,13 @@ const FeaturedProjects = () => {
                         project.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
                       }
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300" />
 
                     <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
-                      <span className="text-[10px] uppercase font-mono font-bold px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-highlight border border-white/10 shadow-md">
+                      <span className="text-[10px] uppercase font-mono font-bold px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-highlight border border-white/10 shadow-md">
                         #{index + 1}
                       </span>
                     </div>
@@ -204,13 +217,13 @@ const FeaturedProjects = () => {
                         {project.description}
                       </p>
 
-                      {/* Tech Stack Pills dynamically linked */}
+                      {/* Tech Stack Pills */}
                       <div className="flex flex-wrap gap-1.5 mb-4">
                         {project.techStack?.map((tech) => (
                           <button
                             key={tech}
                             onClick={() => setSearchQuery(tech)}
-                            className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-secondary/80 text-highlight border border-highlight/20 hover:bg-highlight hover:text-dark transition-colors cursor-pointer"
+                            className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-secondary/60 text-highlight hover:bg-highlight hover:text-dark transition-all cursor-pointer"
                             title={`Filter by ${tech}`}
                           >
                             {tech}
@@ -221,10 +234,10 @@ const FeaturedProjects = () => {
 
                     {/* Technical Breakdown Preview Toggle */}
                     {(project.databaseSchema || project.apiRoutes) && (
-                      <div className="pt-2 border-t border-divider/15">
+                      <div className="pt-2 border-t border-divider/10">
                         <button
                           onClick={() => setExpandedProject(isExpanded ? null : project.title)}
-                          className="w-full py-2 px-3 rounded-xl bg-secondary/40 hover:bg-secondary text-[11px] font-bold text-highlight border border-divider/10 transition-colors flex items-center justify-between cursor-pointer"
+                          className="w-full py-2 px-3 rounded-xl bg-secondary/30 hover:bg-secondary/60 text-[11px] font-bold text-highlight transition-colors flex items-center justify-between cursor-pointer"
                         >
                           <span className="flex items-center gap-1.5">
                             <CodeIcon sx={{ fontSize: 14 }} />
@@ -239,10 +252,10 @@ const FeaturedProjects = () => {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="mt-3 space-y-3 text-left overflow-hidden"
+                              className="mt-3 space-y-2 text-left overflow-hidden"
                             >
                               {project.databaseSchema && (
-                                <div className="p-3 rounded-xl bg-secondary/60 border border-divider/10 text-[11px] space-y-1">
+                                <div className="p-3 rounded-xl bg-secondary/40 text-[11px] space-y-1">
                                   <div className="font-bold text-emerald-400 flex items-center gap-1">
                                     <StorageIcon sx={{ fontSize: 13 }} />
                                     <span>DB: {project.databaseSchema.type}</span>
@@ -254,7 +267,7 @@ const FeaturedProjects = () => {
                               )}
 
                               {project.apiRoutes && (
-                                <div className="p-3 rounded-xl bg-secondary/60 border border-divider/10 text-[11px] space-y-1">
+                                <div className="p-3 rounded-xl bg-secondary/40 text-[11px] space-y-1">
                                   <div className="font-bold text-highlight flex items-center gap-1">
                                     <HttpIcon sx={{ fontSize: 14 }} />
                                     <span>Endpoints</span>
@@ -272,36 +285,40 @@ const FeaturedProjects = () => {
                       </div>
                     )}
 
-                    {/* Action Links */}
-                    <div className="flex items-center gap-3 pt-3 border-t border-divider/15">
-                      {project.repo && (
-                        <a
-                          href={project.repo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex items-center justify-center gap-2 bg-secondary hover:bg-highlight hover:text-dark hover:border-red text-primary font-bold text-xs py-2.5 rounded-xl border border-divider/20 transition-all duration-300 shadow-sm ${
-                            hasLive ? "flex-1" : "w-full"
-                          }`}
-                          title="View Repository"
-                        >
-                          <GitHubIcon sx={{ fontSize: 16 }} />
-                          <span>GitHub Repository</span>
-                        </a>
-                      )}
+                    {/* Action Links - Dynamic 4-state validation */}
+                    {(hasRepo || hasLive) && (
+                      <div className="flex items-center gap-3 pt-3 border-t border-divider/10 mt-auto">
+                        {hasRepo && (
+                          <a
+                            href={project.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`btn-secondary flex items-center justify-center gap-2 font-bold text-xs py-2.5 rounded-xl shadow-sm ${
+                              hasLive ? "flex-1" : "w-full"
+                            }`}
+                            title="View Repository"
+                          >
+                            <GitHubIcon sx={{ fontSize: 16 }} />
+                            <span>GitHub Repository</span>
+                          </a>
+                        )}
 
-                      {hasLive && (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-1.5 bg-highlight text-dark font-bold text-xs py-2.5 rounded-xl hover:bg-white transition-all duration-300 shadow-md shadow-highlight/20"
-                          title="Open Live Site"
-                        >
-                          <span>Live Demo</span>
-                          <LaunchIcon sx={{ fontSize: 14 }} />
-                        </a>
-                      )}
-                    </div>
+                        {hasLive && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`btn-primary flex items-center justify-center gap-1.5 font-bold text-xs py-2.5 rounded-xl shadow-md ${
+                              hasRepo ? "flex-1" : "w-full"
+                            }`}
+                            title="Open Live Site"
+                          >
+                            <span>Live Demo</span>
+                            <LaunchIcon sx={{ fontSize: 14 }} />
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               );
@@ -309,19 +326,38 @@ const FeaturedProjects = () => {
           </AnimatePresence>
         </div>
 
+        {/* Empty Search State */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-16 bg-secondary/20 rounded-3xl border border-divider/10">
+          <div className="text-center py-16 bg-secondary/20 rounded-3xl border border-white/5">
             <p className="text-third text-sm">No projects matching your current search or category filter.</p>
             <button
               onClick={() => {
                 setSearchQuery("");
                 setSelectedCategory("all");
               }}
-              className="mt-4 px-4 py-2 rounded-xl bg-highlight text-dark font-bold text-xs cursor-pointer"
+              className="mt-4 px-4 py-2 rounded-xl btn-primary font-bold text-xs cursor-pointer"
             >
               Reset Filters
             </button>
           </div>
+        )}
+
+        {/* "Explore All Projects" CTA Button for Home Page */}
+        {limit && filteredProjects.length > limit && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-14 text-center"
+          >
+            <Link
+              to="/projects"
+              className="btn-primary inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-black text-sm shadow-xl hover:scale-105 transition-all duration-300 group"
+            >
+              <span>Explore All ({projects.length}) Repositories & Demos</span>
+              <ArrowForwardIcon sx={{ fontSize: 18 }} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+            </Link>
+          </motion.div>
         )}
 
       </div>
